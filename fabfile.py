@@ -95,7 +95,7 @@ def gh_pages():
     local("ghp-import -b {github_pages_branch} {deploy_path}".format(**env))
     local("git push origin {github_pages_branch}".format(**env))
 
-TEMPLATE = """
+TEMPLATE_RST = """
 {title}
 {hashes}
 
@@ -110,12 +110,40 @@ TEMPLATE = """
 """
 
 # TEMPLATE is declared before hand, and all the necessary imports made
-def make_entry(title):
+def make_entry_rst(title):
     today = datetime.today()
     slug = title.lower().strip().replace(' ', '-')
     f_create = "content/{}_{:0>2}_{:0>2}_{}.rst".format(
         today.year, today.month, today.day, slug)
-    t = TEMPLATE.strip().format(title=title,
+    t = TEMPLATE_RST.strip().format(title=title,
+                                hashes='#' * len(title),
+                                year=today.year,
+                                month=today.month,
+                                day=today.day,
+                                hour=today.hour,
+                                minute=today.minute,
+                                slug=slug)
+    with open(f_create, 'w') as w:
+        w.write(t)
+    print("File created -> " + f_create)
+
+TEMPLATE_MD = """
+Title: {title}
+Date: {year}-{month}-{day} {hour}:{minute:02d}
+Tags: thats, awesome
+Category: yeah
+Slug: {slug}
+
+
+"""
+
+# TEMPLATE is declared before hand, and all the necessary imports made
+def make_entry(title):
+    today = datetime.today()
+    slug = title.lower().strip().replace(' ', '-')
+    f_create = "content/{}_{:0>2}_{:0>2}_{}.md".format(
+        today.year, today.month, today.day, slug)
+    t = TEMPLATE_MD.strip().format(title=title,
                                 hashes='#' * len(title),
                                 year=today.year,
                                 month=today.month,

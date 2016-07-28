@@ -1,9 +1,0 @@
-New Post
-########
-
-:date: 2016-7-25 21:13
-:tags:
-:category:
-:slug: new-post
-:summary:
-:status: draft

@@ -3,8 +3,9 @@
 from __future__ import unicode_literals
 
 AUTHOR = u'Gary Bake'
-SITENAME = u'GaryBlog'
-SITEURL = ''
+SITENAME = u'This and That'
+SITEURL = '' 
+# SITEURL = 'http://garybake.com'
 
 PATH = 'content'
 
@@ -20,18 +21,28 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Blogroll
-LINKS = (('Pelican', 'http://getpelican.com/'),
-         ('Python.org', 'http://python.org/'),
-         ('Jinja2', 'http://jinja.pocoo.org/'),
-         ('You can modify those links in your config file', '#'),)
-
-# Social widget
-SOCIAL = (('You can add links in your config file', '#'),
-          ('Another social link', '#'),)
+LINKS = (('Home', '/'),)  # TODO Opens in a new window???
 
 DEFAULT_PAGINATION = 10
 
-# Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
+STATIC_PATHS = ["images"]
 
-THEME = '/home/gary/Devel/blog-pelican-themes/clean-blog'
+THEME = '/home/gary/Devel/blog/themes/Flex'
+
+GITHUB_URL = 'https://github.com/garybake'
+TWITTER_USERNAME = 'MrGaryBake'
+
+SOCIAL = (('twitter', 'http://twitter.com/MrGaryBake'),
+          ('facebook', 'https://www.facebook.com/garybake'),
+          ('stack-overflow', 'http://stackoverflow.com/users/1205730/garybake'),
+          ('linkedin', 'https://www.linkedin.com/in/garybakeuk'),
+          ('github', 'http://github.com/garybake'),
+          )
+
+SITELOGO = '/images/face.jpg'
+
+GOOGLE_ANALYTICS = "UA-15291213-1"
+
+DISQUS_SITENAME = "garybake"
+
+PYGMENTS_STYLE = "monokai"

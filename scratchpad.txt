@@ -1,1 +1,13 @@
 http://nafiulis.me/making-a-static-blog-with-pelican.html
+
+-generate site
+pelican content
+
+
+-generate html
+make html
+
+fab make_entry:"How I got here"
+
+
+reStructuredText
