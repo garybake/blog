@@ -27,6 +27,16 @@ DEFAULT_PAGINATION = 10
 
 STATIC_PATHS = ["images"]
 
+STATIC_PATHS = [
+    'images', 
+    'extra/robots.txt', 
+    'extra/favicon.ico'
+]
+EXTRA_PATH_METADATA = {
+    'extra/robots.txt': {'path': 'robots.txt'},
+    'extra/favicon.ico': {'path': 'favicon.ico'}
+}
+
 THEME = '/home/gary/Devel/blog/themes/Flex'
 
 GITHUB_URL = 'https://github.com/garybake'
