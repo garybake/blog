@@ -10,4 +10,25 @@ make html
 fab make_entry:"How I got here"
 
 
-reStructuredText
+
+Blog ideas
+==========
+ESP
+-Server
+-OLED shield
+-Button
+--Door bell
+-DHT shield
+-Relay shield
+-Motor shield
+-Micro SD shield
+-BMP180
+-Nokia screen
+-Traffic lights
+-Door bell
+
+Microbit
+-Balance game
+-Racing game
+-Banana music
+-Paralax starfield
