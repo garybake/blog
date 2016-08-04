@@ -1,7 +1,7 @@
 Title: Getting started with the wemos d1 and micropython
 Date: 2016-7-27 16:53
 Tags: esp8266, micropython
-Category:
+Category: esp8266
 Slug:
 
 First thing to do is obtain the wemos d1 mini.

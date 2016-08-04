@@ -1,15 +1,16 @@
 Title: Connected to the world
 Date: 2016-7-29 12:36
 Tags: esp8266, micropython
-Category: yeah
+Category: esp8266
 Slug: connected-to-the-world
 
 We have the d1 mini and able to run python code on it, yey us!
 
-The big sell of the ESP8266 is the embeded wifi. With this entry we'll go through using this with micropython.
+The big sell of the ESP8266 is the embeded wifi. With this entry we'll go through using this with micropython.  
 
-Connect
--------
+#### Get Connected
+
+<img src="images/wifi.png" alt="wifi" style="width: 50px;"/>
 
 Connect to the D1 and enter the following into the repl. I'll explain the code a chunk at a time.
 
@@ -66,8 +67,7 @@ And thats your device connected to the world!
 Note that your device will remember your connection settings and will try to connect using these setting each time the esp8266 is restarted.
 This is a feature of the esp8266 chip rather than micropython.
 
-Internet requests
------------------
+#### Requests
 
 To do a simple GET request you can use the instructions [here](http://docs.micropython.org/en/latest/esp8266/esp8266/tutorial/network_tcp.html#http-get-request) or import urequests.
 

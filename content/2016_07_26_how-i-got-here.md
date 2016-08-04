@@ -1,7 +1,7 @@
 Title: How I got here
 Date: 2016-7-26 16:53
 Tags: micropython, esp8266
-Category:
+Category: esp8266
 Slug: how-i-got-here
 
 I made a new years resolution to get into electronics.  

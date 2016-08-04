@@ -14,6 +14,7 @@ fab make_entry:"How I got here"
 Blog ideas
 ==========
 ESP
+-Bootstrap app
 -Server
 -OLED shield
 -Button
