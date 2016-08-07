@@ -18,6 +18,12 @@ CATEGORY_FEED_ATOM = 'feeds/%s.atom.xml'
 
 DELETE_OUTPUT_DIRECTORY = True
 
+SITEURL = 'http://garybake.com'
+
+GOOGLE_ANALYTICS = "UA-15291213-1"
+
+DISQUS_SITENAME = "garybake"
+
 # Following items are often useful when publishing
 
 #DISQUS_SITENAME = ""

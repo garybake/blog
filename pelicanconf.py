@@ -5,7 +5,6 @@ from __future__ import unicode_literals
 AUTHOR = u'Gary Bake'
 SITENAME = u'This and That'
 SITEURL = '' 
-# SITEURL = 'http://garybake.com'
 
 PATH = 'content'
 
@@ -50,9 +49,5 @@ SOCIAL = (('twitter', 'http://twitter.com/MrGaryBake'),
           )
 
 SITELOGO = '/images/face.jpg'
-
-GOOGLE_ANALYTICS = "UA-15291213-1"
-
-DISQUS_SITENAME = "garybake"
 
 PYGMENTS_STYLE = "monokai"
