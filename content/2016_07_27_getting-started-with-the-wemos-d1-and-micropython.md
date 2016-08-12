@@ -35,7 +35,7 @@ pushes it to the serial pins on the d1.
 
 The serial device will show under ```/dev/tty*```. On my laptop it shows as ```/dev/ttyUSB0```
 
-If you're strugging to find it you can tail the kernel log as you plug it in and it should show up (or at least give some helpful information if it doesn't)
+If you're struggling to find it you can tail the kernel log as you plug it in and it should show up (or at least give some helpful information if it doesn't)
 
 ```python
 > tail -f /var/log/kernel.log

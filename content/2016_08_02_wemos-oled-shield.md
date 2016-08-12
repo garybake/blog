@@ -58,7 +58,7 @@ The [schematics](http://www.wemos.cc/Products/oled_shield.html) for the OLED loo
 ```display = ssd1306.SSD1306_I2C(64, 48, i2c)```
 We create our display object passing in the width (64), height (48) and connection (i2c) parameters (the i2c parameter is labeled as external_vcc?).
 
-Displays generaly use a frame buffer. It's sort of like a hidden screen. 
+Displays generally use a frame buffer. It's sort of like a hidden screen. 
 We do all of our draw operations here and then the buffer screen is copied to the physical screen.
 (insert nice buffer pic here)
 This reduces flicker as we aren't seeing all the different things being drawn just, the final picture.

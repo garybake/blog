@@ -6,7 +6,7 @@ Slug: connected-to-the-world
 
 We have the d1 mini and able to run python code on it, yey us!
 
-The big sell of the ESP8266 is the embeded wifi. With this entry we'll go through using this with micropython.  
+The big sell of the ESP8266 is the embedded wifi. With this entry we'll go through using this with micropython.  
 
 #### Get Connected
 
@@ -51,7 +51,7 @@ ip:192.168.0.18,mask:255.255.255.0,gw:192.168.0.1
 ```
 
 I'm not sure what the top few lines of info are.
-The next line shows a succesfull connection, the router and which channel.
+The next line shows a successful connection, the router and which channel.
 DCHP is started and from this the ESP8266 gains an ip address.  
 You then see your ip address, the gateway mask and the gateway ip.
 
@@ -84,4 +84,4 @@ print(r.status_code)
 print(r.text)
 ```
 
-The d1 has sent a request through the internet and recieved a response, yey!
+The d1 has sent a request through the internet and received a response, yey!

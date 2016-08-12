@@ -6,7 +6,7 @@ Slug: how-i-got-here
 
 I made a new years resolution to get into electronics.  
 Then I discovered [aliexpress](http://s.click.aliexpress.com/e/AeYba2fQV) and it became a super cheap new hobby.
-Then the raspberry pi zero arrived and I wasn't so worried about busting it while I learnt. 
+Then the raspberry pi zero arrived and I wasn't so worried about busting it while I learned. 
 
 The GPIO python library was pretty easy to learn.
 A few months later and I was seeing a lot of chatter about a new microcontroller called the esp8266 - with wifi, wooo!
@@ -33,4 +33,4 @@ My goals here are
 * Spread the knowledge  
 * Improve my technical writing  
 
-If I can achieve on of these I'll be happy
+If I can achieve one of these I'll be happy
