@@ -20,7 +20,7 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Blogroll
-LINKS = (('Home', '/'),)  # TODO Opens in a new window???
+# LINKS = (('Home', '/'),)  # TODO Opens in a new window???
 
 DEFAULT_PAGINATION = 10
 

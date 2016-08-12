@@ -5,7 +5,7 @@ Category: esp8266
 Slug: how-i-got-here
 
 I made a new years resolution to get into electronics.  
-Then I discovered aliexpress and it became a super cheap new hobby.
+Then I discovered [aliexpress](http://s.click.aliexpress.com/e/AeYba2fQV) and it became a super cheap new hobby.
 Then the raspberry pi zero arrived and I wasn't so worried about busting it while I learnt. 
 
 The GPIO python library was pretty easy to learn.

@@ -8,7 +8,7 @@ First thing to do is obtain the wemos d1 mini.
 
 ![d1_mini](images/d1_mini.jpg)
 
-Currently they can be bought from the [wemos store on ali express](http://www.aliexpress.com/store/1331105) for £3.08 each with free p&p.
+Currently they can be bought from the [wemos store on ali express](http://s.click.aliexpress.com/e/zfeyfIaub) for £3.08 each with free p&p.
 
 I've heard there are fake versions on aliexpress that are cheaper but the link above takes you to the manufacturers store.
 They can take 2/3 weeks to arrive and can be bought on ebay if you need them sooner.
