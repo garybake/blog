@@ -76,7 +76,7 @@ I'll go through pip-micropython at some point but for now the urequest library c
 Use the Ctrl+E method to past the code into the device.
 I think there must be a small buffer for this as it failed to paste. I found that I had to paste the code in 3 sections - Response, request and then the rest.
 
-If you've ever used the normal [python requests library](docs.python-requests.org) you'll appreciate how powerful it is.
+If you've ever used the normal [python requests library](http://docs.python-requests.org/) you'll appreciate how powerful it is.
 
 ```python
 r = get('http://micropython.org/ks/test.html')
