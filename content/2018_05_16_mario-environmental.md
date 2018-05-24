@@ -4,7 +4,7 @@ Tags: thats, awesome, ML
 Category: yeah
 Slug: mario-environmental
 
-# Step 2. Making a reinforcement learning environment API
+# Step 2. Explore the mario environment
 
 This is were things get exciting.
 I found a really well documented, well written, python based gameboy emulator - [PyBoy](https://github.com/Baekalfen/PyBoy)
