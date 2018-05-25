@@ -45,4 +45,28 @@ How good was the change in the environment caused by our last action. This is wh
 In our mario world each timestep can be seen as discrete rather than continous. We press a button and the gameboy moves forward one tick.
 There are RL methods to handle continuous time but discrete keeps things a lot simpler.
 
+The policy (π) is what maps from each state (s) to the best action (a) to take
 
+## π(s) = a
+
+The job of reinforcement learning is to determine this function and (usually) iteratively improve it.
+
+So with all this in place, the environment is the emulator (plus our api wrapper) and the agent is our controlling script.
+
+## Build the API
+
+On of the best ways of learning RL is through the open AI gym environments.  
+[http://gym.openai.com/](http://gym.openai.com/)
+
+The api they present is really simple and tidy and I use this as the basis for our gameboy RL api  
+
+
+Below is an overview of the openai gym api  
+
+The first thing is to get create the evironment and set it back to it's start state
+
+```python
+import gym
+env = gym.make('CartPole-v0')
+env.reset()
+```
