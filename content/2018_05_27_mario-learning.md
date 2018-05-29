@@ -95,20 +95,81 @@ max_Q = np.argmax(q)
 action[max_Q] = 1
 ```
 
-### Neural Network model
+### Convolutional Neural Network model
 
-The agents view of the world is a in a gray (green?) scale image. We need to stack 4 of them on top of each to help the learning process gague marios direction and velocity. If we just used a single frame the model wouldn't be able to tell if mario was falling or jumping.
+The agents view of the world is a in a gray (green?) scale image. We need to stack 4 of them on top of each to help the learning process gauge marios direction and velocity. If we just used a single frame the model wouldn't be able to tell if mario was falling or jumping.
 (TODO - the learning stack size should be a hyperparameter)
 
 We store these stacks in a big cache called the replay memory. This is one of the parts I thought was pretty innivative.
 On each tick the agent doesn't run a learning cycle on the last action, it runs it on a random action from the past. If we only picked the last action then the known reward would only be from the last action taken. By picking a random action from the past we can get a decent calculation of the future reward from that action by traversing the future of that action in the cache.
 
-Another trick is we the netork model used. Using images I would have used a convolutional network, but in this case we don't.
-Convolutional networks allow it to learn a face anywhere in an image, its spacially invariant. Learning to play the gameboy it is really important for the network to learn where mario is on the screen and the effects it has. 
+The model
+
+We use a [convolutional network](https://medium.freecodecamp.org/an-intuitive-guide-to-convolutional-neural-networks-260c2de0a050) given our imput is images. After the convolution layers we flatten the data and pass it through a standard dense layer. The final output has 3 nodes, with each node containing the predicted weighting of each action (left, none, right). 
 
 
+```python
+def buildmodel():
+    # Adapted from https://yanpanlau.github.io/2016/07/10/FlappyBird-Keras.html
+    print("Building the model ")
 
-Notes
-http://neuro.cs.ut.ee/demystifying-deep-reinforcement-learning/
-http://adventuresinmachinelearning.com/reinforcement-learning-tutorial-python-keras/
-https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part-7-action-selection-strategies-for-exploration-d3a97b7cceaf
+    model = Sequential()
+    model.add(layers.Convolution2D(
+        32, 8, 8, subsample=(4, 4), border_mode='same',
+        input_shape=(IMG_ROWS, IMG_COLS, IMG_CHANNELS)))
+    model.add(layers.Activation('relu'))
+    model.add(layers.Convolution2D(
+        64, 4, 4, subsample=(2, 2), border_mode='same'))
+    model.add(layers.Activation('relu'))
+    model.add(layers.Convolution2D(
+        64, 3, 3, subsample=(1, 1), border_mode='same'))
+    model.add(layers.Activation('relu'))
+    model.add(layers.Flatten())
+    model.add(layers.Dense(512))
+    model.add(layers.Activation('relu'))
+    model.add(layers.Dense(3))
+
+    adam = Adam(lr=1e-6)
+    model.compile(
+        loss='mse',
+        optimizer=adam)
+    print("We finish building the model")
+    return model
+```
+
+### Running
+
+Putting it all together and we can kick of some learning, woohoo!
+
+There is a script in the [repo](https://github.com/garybake/PyBoy) called run_mario_test.sh that launches the client and server in parallel.  
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1NzQAoZR-E0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
+### Tuning
+
+This is the part where we would tune the model (both the network and the Q-learning parameters).
+Unfortunately I'm running this on a laptop without a graphics card for accelerated learning. You can see on the video each step is really slow.
+It starts slowish on the exploration phase and then slows right down when it starts learning. I'm not going to get enough cycles to even start tuning the network.
+
+### TODO
+
+Phew, this is where I'm currently up to with it. There is more todo, primarily around speeding up the steps.
+I think I need to run this on an aws instance with a decent gpu, but this means getting it running it headless but still rendering enough.
+There is still plenty of fat to trim in the whole process.
+
+
+### A third way?
+Whilst writing this post Open AI [announced](https://blog.openai.com/gym-retro/) support for more consoles, including gameboy, happy days!  
+[repo](https://github.com/openai/retro/tree/develop)  
+
+Maybe there will Step 5 if I can get it working
+
+### Shoutout
+
+Finally a shoutout to a book that has been really helpful for me learning deep learning. It's written by the author of the keras library, and it's really approchable and understandable. I can't reccomend it enough.
+
+[Deep Learning with python by François Chollet](https://www.manning.com/books/deep-learning-with-python)
+
+<img src="images/rl/keras_book.jpg" alt="mario reading" style="height: 200px;"/>
