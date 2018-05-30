@@ -1,10 +1,10 @@
 Title: Mario Environment API
 Date: 2018-5-24 12:38
-Tags: thats, awesome, ML
+Tags: thats, awesome, ML, emulation
 Category: yeah
 Slug: mario-environment-api
 
-# Step 3. Build an api for the environment
+# Part 3. Build an api for the environment
 
 Now that we can pull out information from the gameboy environment, why do we need to do this?
 
@@ -203,3 +203,10 @@ I also talked to the PyBoy author about boosting the speed. We don't neccasarily
 I figured that we don't need the full rendering, we only need the screen array. This would also give us some more clock cycles (profiling showed it as once of the slowest part) and also we could run it headless on a super aws gpu instance. Unfortunately the buffer is created right at the end of the render pipeline so it maybe trouble to run things headless - future todo.
 
 We have mario running round in circles. He's dumb but has potential.
+
+### Links
+
+- [Part 1. GBakeBoy Emulator](./GBakeBoy.html)  
+- [Part 2. Mario Environmental](./mario-environmental.html)  
+- [Part 3. Mario Environment API](./mario-environment-api.html)  
+- [Part 4. Reinforcement Learning - Q-Learning](./mario-learning.html)  

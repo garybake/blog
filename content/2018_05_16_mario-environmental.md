@@ -1,10 +1,10 @@
 Title: Mario Environmental
 Date: 2018-5-16 22:25
-Tags: thats, awesome, ML
+Tags: thats, awesome, ML, emulation
 Category: yeah
 Slug: mario-environmental
 
-# Step 2. Explore the mario environment
+# Part 2. Explore the mario environment
 
 This is were things get exciting.
 I found a really well documented, well written, python based gameboy emulator - [PyBoy](https://github.com/Baekalfen/PyBoy)
@@ -153,3 +153,10 @@ I've lost the code I used but it used the pillow library to convert this array i
 Thats should give us enough information about the environment to be able to train Mario.
 
 Next: Make a clean environment api
+
+### Links
+
+- [Part 1. GBakeBoy Emulator](./GBakeBoy.html)  
+- [Part 2. Mario Environmental](./mario-environmental.html)  
+- [Part 3. Mario Environment API](./mario-environment-api.html)  
+- [Part 4. Reinforcement Learning - Q-Learning](./mario-learning.html)  
