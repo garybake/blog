@@ -179,7 +179,7 @@ Maybe there will Step 5 if I can get it working
 
 ### Shoutout
 
-Finally a shoutout to a book that has been really helpful for me learning deep learning. It's written by the author of the keras library, and it's really approchable and understandable. I can't reccomend it enough.
+Finally a shoutout to a book that has been really helpful for me learning deep learning. It's written by the author of the keras library, and it's really approachable and understandable. I can't recommend it enough.
 
 [Deep Learning with python by François Chollet](https://www.manning.com/books/deep-learning-with-python)
 
