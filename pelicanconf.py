@@ -1,16 +1,11 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*- #
-from __future__ import unicode_literals
-
-AUTHOR = u'Gary Bake'
-SITENAME = u'This and That'
+AUTHOR = 'Gary Bake'
+SITENAME = 'This and That'
 SITEURL = '' 
 
 PATH = 'content'
 
 TIMEZONE = 'Europe/London'
-
-DEFAULT_LANG = u'en'
+DEFAULT_LANG = 'en'
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
