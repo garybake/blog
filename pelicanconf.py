@@ -36,7 +36,7 @@ EXTRA_PATH_METADATA = {
     'extra/favicon.ico': {'path': 'favicon.ico'}
 }
 
-THEME = '/home/gary/Devel/blog/themes/Flex'
+THEME = 'Flex'
 
 GITHUB_URL = 'https://github.com/garybake'
 TWITTER_USERNAME = 'MrGaryBake'
