@@ -12,17 +12,17 @@ Damn, my site is broke! How embarrasing.
 
 <img src="images/fixthings/support_team.jpg" alt="gandalf memory" style="height: 270px;"/>
 
-A quick check and it looks like I was using a mix of http and https, this shows how long it was since the last update.
+A quick check and it looks like I was using a mix of http and https; this shows how long it was since the last update.
 
 # The site is up
 
 It was quick enough to fix, just updating the links in the page. 
 
-This shouldn't be a problem, all links should be relative to the root page and use the same protocol. I'm using a static site generator so either I or the generator is doing these shenanigans.
+This shouldn't be a problem, all links should be relative to the root page and use the same protocol. I'm using a static site generator ([pelican](https://getpelican.com/)), so either I or the generator is doing these shenanigans.
 
 # Fix the things
 
-If I'm going to create more amazing masterpiece posts this year then I need to crack open the software check everything still works.
+If I'm going to create more amazing masterpiece posts this year then I need to crack open the code and check everything still works.
 
 <img src="images/fixthings/gandalf_no_memory.jpg" alt="gandalf memory" style="height: 270px;"/>
 
@@ -43,7 +43,7 @@ Compile the site - no bosh. It can't find the theme. I had put it in a folder on
 
 Take a step forward.
 
-Site is up, with no icons just as I planned <sad face>. We are missing font-awesome. I think these should come from the theme but that is missing some files in the latest version. They have stopped work on the theme and its now outdated! I really like this theme. Fixed by copying the latest set of files to the themes directory.    
+Site is up with no icons just as I planned <sad face>. We are missing font-awesome. I think these should come from the theme but that is missing some files in the latest version. They have stopped work on the theme and its now outdated! I really like this theme. Fixed by copying the latest set of files to the themes directory.    
 
  - TODO the theme should use a cdn.  
  - TODO what to do about the unsupported theme?  
@@ -58,7 +58,7 @@ Why did I add notes to a scratch file? There is a readme right there asking for 
 
 <img src="images/fixthings/python2.jpeg" alt="gandalf memory" style="height: 270px;"/>
 
-I think it uses python2! or at least the generated files did. In 2016 when I generated the configs I was using python2 in my role and I guess I had used that laptop. Anyways, I generated a blank pelican project and checked for any major differences. It looks like the only main change is to remove some polyfill imports and remove the unicode flag from the start of some strings. Easier than I thought, phew!
+I think it uses python 2! or at least the generated files did. In 2016 when I generated the configs I was using python 2 in my role and I guess I had used that laptop. Anyways, I generated a blank pelican project and checked for any major differences. It looks like the only main change is to remove some polyfill imports and remove the unicode flag from the start of some strings. Easier than I thought, phew!
 
 - TODO Use a newly generated config. There is all kinds of junk in the current one.
 
@@ -66,4 +66,4 @@ I think it uses python2! or at least the generated files did. In 2016 when I gen
 Generate the site with all the changes. Add a new blog post and upload to the web host.
 If you are reading this then the test has passed.
 
-tldr, this page is just a test.
+tl;dr, this page is just a test.

@@ -7,13 +7,13 @@ In the repo cloned folder
 
     python  - m venv venv
     source venv/bin/activate 
-    pip install  - r requirements.txt
+    pip install  -r requirements.txt
     git clone git@github.com:alexandrevicenzi/Flex.git
 
 ### Usage
 Dev server
 
-    pelican  - r  - l
+    pelican  -r  -l
 
 Generate site
 
