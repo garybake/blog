@@ -43,7 +43,9 @@ WORKDIR /app/Project
 
 It uses the official pyspark 3.3.1 docker base image, installs the pyspark and pytest libraries and creates the project folder.  
 
-You can use a dockerfile as part of your CI pipeline on with [bitbucket pipelines](https://bitbucket.org/product/features/pipelines) which boot the image, run the tests and then clear it all out. One important thing to take note of 
+You can use a dockerfile as part of your CI pipeline on with [bitbucket pipelines](https://bitbucket.org/product/features/pipelines) which boots the image, runs the tests and then clear it all out. 
+
+One important thing to take note of is you need to match the versions to your production environment
 is that you need to 
 
 To build the image
