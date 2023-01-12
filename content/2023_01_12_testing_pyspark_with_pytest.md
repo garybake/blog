@@ -11,7 +11,7 @@ I couldn't really find much out there that describes the process neatly, mostly 
 
 Originally I used unittest but recently switched over to use pytest. I find it a lot cleaner to use and the tests are easier to read.
 
-The code for this post can be found at https://github.com/garybake/pyspark_pytest  
+The code for this post can be found on [github](https://github.com/garybake/pyspark_pytest)  
 
 # Basic pytest
 
@@ -41,17 +41,48 @@ RUN mkdir -p /app
 WORKDIR /app/Project
 ```
 
-It uses the official pyspark 3.3.1 docker base image, installs the pyspark and pytest libraries and creates the project folder.  
+Here we use the official pyspark 3.3.1 docker base image, installs the pyspark and pytest libraries and creates the project folder.  
 
 You can use a dockerfile as part of your CI pipeline on with [bitbucket pipelines](https://bitbucket.org/product/features/pipelines) which boots the image, runs the tests and then clear it all out. 
 
-One important thing to take note of is you need to match the versions to your production environment
-is that you need to 
+One important thing to take note is that you **need to match the versions in your test environment to your production environment** else your tests can be invalid.
+You need to find and match the versions of
+ - Java
+ - Spark
+ - Python
+ - Pyspark library
+ - ... any other dependencies used in production
+
 
 To build the image
 
     docker build -t "test_pyspark" .
 
-fsd    
+To launch the container using the image, for linux/mac
 
+    docker run -it -v $(pwd):/app test_pyspark bash
+
+For windows
+
+    docker run -it -v ${pwd}:/app test_pyspark bash
+
+TODO: I tried getting the docker-compose working but it was really hacky to get the box to stay running.
+
+# Pytest
+
+Lets create a noddy app to test
+
+in Project/src/main.py
+
+    def add_one(val):
+        return val + 1
+
+Add the file for the tests in Project/tests/test_something.py
+
+    class TestMe:
+
+        def test_add_one(self):
+            assert add_one(3) == 4
+
+ad;lfksdf
 
