@@ -84,5 +84,8 @@ Add the file for the tests in Project/tests/test_something.py
         def test_add_one(self):
             assert add_one(3) == 4
 
-ad;lfksdf
+I don't intend this to be an article about the best ways to write tests, just to say I find it easier to use one test class per file. That class should represent one object in the app or an endpoint. Then that class should contain a barrage of tests for that object. Also I haven't added any notes to the code.
 
+-TODO should probably add type hints-
+
+as
