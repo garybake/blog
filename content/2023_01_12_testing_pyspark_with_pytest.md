@@ -9,6 +9,8 @@ Slug: python
 In my past couple of roles I've used pyspark and needed to to add tests to the code as part of the CI pipeline.
 I couldn't really find much out there that describes the process neatly, mostly a couple of stackoverflow questions. 
 
+<img src="images/pytest/drake_test.jpeg" alt="drake meme" style="height: 270px;"/>
+
 Originally I used unittest but recently switched over to use pytest. I find it a lot cleaner to use and the tests are easier to read.
 
 The code for this post can be found on [github](https://github.com/garybake/pyspark_pytest)  
@@ -41,7 +43,9 @@ RUN mkdir -p /app
 WORKDIR /app/Project
 ```
 
-Here we use the official pyspark 3.3.1 docker base image, installs the pyspark and pytest libraries and creates the project folder.  
+Here we use the official pyspark 3.3.1 docker base image, installs the pyspark and pytest libraries and creates the project folder. 
+
+<img src="images/pytest/spark-meme.jpeg" alt="spark meme" style="height: 270px;"/>
 
 You can use a dockerfile as part of your CI pipeline on with [bitbucket pipelines](https://bitbucket.org/product/features/pipelines) which boots the image, runs the tests and then clear it all out. 
 
@@ -72,6 +76,8 @@ TODO: I tried getting the docker-compose working but it was really hacky to get 
 
 Lets create a noddy app to test
 
+<img src="images/pytest/got_meme.jpeg" alt="got meme" style="height: 270px;"/>
+
 in Project/src/main.py
 
     def add_one(val):
@@ -81,11 +87,132 @@ Add the file for the tests in Project/tests/test_something.py
 
     class TestMe:
 
+        def test_always_passes(self):
+            assert True
+
         def test_add_one(self):
             assert add_one(3) == 4
+
+I've added a quick test that always passes. You wouldn't put this in any normal code but it helps to show you have your environment setup correctly.
 
 I don't intend this to be an article about the best ways to write tests, just to say I find it easier to use one test class per file. That class should represent one object in the app or an endpoint. Then that class should contain a barrage of tests for that object. Also I haven't added any notes to the code.
 
 -TODO should probably add type hints-
 
-as
+
+To run the tests ensure you are in the /app/Project directory and run the following
+
+    pytest tests/
+
+This will run all of the tests in the test directory. Anything in a file called test_*.py  -TODO which files/functions exactly?-
+
+
+    root@fc85736f011c:/app/Project# pytest tests/
+    ================================================= test session starts ==================================================
+    platform linux -- Python 3.9.2, pytest-7.2.0, pluggy-1.0.0
+    rootdir: /app/Project
+    collected 2 items                                                                                                      
+
+    tests/test_something.py ..                                                                                       [100%]
+
+    ================================================== 2 passed in 0.08s ===================================================
+
+
+You can see that both tests passed. We can force a fail and see what output we see when something is wrong.
+
+    root@fc85736f011c:/app/Project# pytest tests/
+    ================================================= test session starts ==================================================
+    platform linux -- Python 3.9.2, pytest-7.2.0, pluggy-1.0.0
+    rootdir: /app/Project
+    collected 2 items                                                                                                      
+
+    tests/test_something.py .F                                                                                       [100%]
+
+    ======================================================= FAILURES =======================================================
+    _________________________________________________ TestMe.test_add_one __________________________________________________
+
+    self = <tests.test_something.TestMe object at 0x7f04324f4f70>
+
+        def test_add_one(self):
+            print('---woohoo-')
+    >       assert add_one(3) == 22
+    E       assert 4 == 22
+    E        +  where 4 = add_one(3)
+
+    tests/test_something.py:28: AssertionError
+    ------------------------------------------------- Captured stdout call -------------------------------------------------
+    ---woohoo-
+    =============================================== short test summary info ================================================
+    FAILED tests/test_something.py::TestMe::test_add_one - assert 4 == 22
+    ============================================= 1 failed, 1 passed in 0.14s ==============================================
+    root@fc85736f011c:/app/Project# 
+
+
+You also get anything that has been printed to the console on an error.
+
+To show everything output to the console including on passing tests add the '-s' parameter when running tests.
+
+    pytest -s tests/
+
+
+# Pyspark
+
+<img src="images/pytest/no_spark_meme.jpeg" alt="no spark meme" style="height: 350px;"/>
+
+Imagine that the code below is part of your application that is destined to change the world.  
+
+
+
+    import pyspark.sql.functions as F
+
+    class SuperDataTransformer:
+
+        def do_the_agg(self, df):
+            df_agg = df\
+                .groupBy('name')\
+                .agg(
+                    F.sum(F.col('value')).alias('sumval')
+                )
+            return df_agg
+
+        def do_the_other_agg(self, df):
+            df_agg = df\
+                .groupBy('name')\
+                .agg(
+                    F.max(F.col('value')).alias('maxval')
+                )
+            return df_agg
+
+There are two functions that do basic aggregations on the passed in dataframe, sum and max. The functions are part of a class that could be part of a pipeline.
+
+# Pyspark tests
+
+<img src="images/pytest/amitesting.png" alt="am i testubfg" style="height: 350px;"/>
+
+Sooooo, you need to test the pyspark code. The first thing you'll need is a spark session. When I built tests previously I had a class (SparkTestCase) that derived from unittest.TestCase. The in the test setUp() function it created the sparksession and attached it as a property of the SparkTestCase. This worked well but pytest has better ways of doing things - [fixtures](https://docs.pytest.org/en/6.2.x/fixture.html)!
+
+Fixtures are used to feed things into your test and make things more modular and generally neater. There are many builtin fixtures such as tmpdir which creates a temporary folder for your test. They are also used to control the startup and teardown functions of tests.
+
+You are going to have a lot of tests using this functionality so it should be in a seperate file (or folder if you have many other fixtures) called tests/spark_base.py
+
+    import pytest
+    from pyspark.sql import SparkSession
+
+    def get_spark():
+        spark = SparkSession.builder\
+            .master("local[*]") \
+            .appName('sparkTesting') \
+            .getOrCreate()
+
+        return spark
+
+    @pytest.fixture()
+    def spark():
+        print("spark setup")
+        spark_session = get_spark()
+        yield spark_session
+        print("teardown")
+
+The fixture has the fixture decorator. Here we are using the startup and teardown functionality. For this we do the setup, yield what we need to the calling test and then do whatever teardown is needed.
+
+
