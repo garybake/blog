@@ -189,7 +189,7 @@ There are two functions that do basic aggregations on the passed in dataframe, s
 
 <img src="images/pytest/amitesting.png" alt="am i testubfg" style="height: 350px;"/>
 
-Sooooo, you need to test the pyspark code. The first thing you'll need is a spark session. When I built tests previously I had a class (SparkTestCase) that derived from unittest.TestCase. The in the test setUp() function it created the sparksession and attached it as a property of the SparkTestCase. This worked well but pytest has better ways of doing things - [fixtures](https://docs.pytest.org/en/6.2.x/fixture.html)!
+No we are at the beef of this article, you need to test the pyspark code. The first thing you'll need is a spark session. When I built tests previously I had a class (SparkTestCase) that derived from unittest.TestCase. The in the test setUp() function it created the sparksession and attached it as a property of the SparkTestCase. This worked well but pytest has better ways of doing things - [fixtures](https://docs.pytest.org/en/6.2.x/fixture.html)!
 
 Fixtures are used to feed things into your test and make things more modular and generally neater. There are many builtin fixtures such as tmpdir which creates a temporary folder for your test. They are also used to control the startup and teardown functions of tests.
 
@@ -213,6 +213,151 @@ You are going to have a lot of tests using this functionality so it should be in
         yield spark_session
         print("teardown")
 
-The fixture has the fixture decorator. Here we are using the startup and teardown functionality. For this we do the setup, yield what we need to the calling test and then do whatever teardown is needed.
+The fixture has the fixture decorator. Here we are using the startup and teardown functionality. For this we do the setup, yield what we need to the calling test and then do whatever teardown is needed. A pseudo code example may help
+
+    run initial code in fixture
+    pass objects to test
+    run a test
+    run tear down code in fixture
+
+In the file that runs the tests Project/tests/test_something.py
 
 
+    import pytest
+
+    import pyspark.sql.functions as F
+
+    from src.main import SuperDataTransformer
+    from tests.spark_base import spark
+
+
+    class TestMe:
+
+        def get_data(self, spark):
+            data = [
+                {'id': 1, 'name': 'abc1', 'value': 22},
+                {'id': 2, 'name': 'abc1', 'value': 23},
+                {'id': 3, 'name': 'def2', 'value': 33},
+                {'id': 4, 'name': 'def2', 'value': 44},
+                {'id': 5, 'name': 'def2', 'value': 55}
+            ]
+            df = spark.createDataFrame(data).coalesce(1)
+            return df
+
+        def test_can_agg(self, spark):
+            df = self.get_data(spark)
+            trans = SuperDataTransformer()
+            df_agg = trans.do_the_agg(df)
+
+            assert 'sumval' in df_agg.columns
+
+            out = df_agg.sort('name', 'sumval').collect()
+
+            assert len(out) == 2
+            assert out[0]['name'] == 'abc1'
+            assert out[1]['sumval'] == 132
+
+        def test_can_do_other_agg(self, spark):
+            df = self.get_data(spark)
+            trans = SuperDataTransformer()
+            df_agg = trans.do_the_other_agg(df)
+
+            assert 'maxval' in df_agg.columns
+
+            out = df_agg.sort('name', 'maxval').collect()
+
+            assert len(out) == 2
+            assert out[0]['name'] == 'abc1'
+            assert out[1]['maxval'] == 55
+
+
+At the top we import the object to test (SuperDataTransformer) and the fixtures for spark.
+
+The first method is get_data. This builds a dataframe for use in the tests. I find having it generated in a single place saves on duplication below. You can have a number of these data generator methods if you are testing different parts of a pipeline. Each test should be isolated so you should know what data is being passed into the function.
+
+A spark session is required for creating the dataframe so this is passed in as a parameter. When the dataframe is returned, one thing I found helpful was to add .coalesce(1). This reduces the number of partitions of the data down to 1 and makes the tests run slightly faster. With the low volume of data we have in the tests this saves time on shuffling.
+
+I'll focus on just the first test as the second one is pretty much the same
+
+The spark session (spark) is passed in as a parameter from the fixture.
+The dataframe is created
+The object under test is created
+The function this test is testing is ran using the test dataframe
+A test to check the correct columns are in the output. We can check here before collecting the data as we want it to fail fast and spark keeps a record of the columns without running everything.
+Then we collect the output of the function. Spark doesn't guarantee any order so it is reccomended to sort the output to ensure it is consistent.
+(at this point is may be handy to print )
+
+If you print the 'out' variable at this point you will see something like 
+
+    [Row(name='abc1', sumval=45), Row(name='def2', sumval=132)]
+
+From here the tests are ran how you would normally build tests. Test for length, types, individual fields in the rows etc.
+
+# Running sets of tests
+
+Spark tests can take time to run. Sometimes you may want to run just the spark or all the tests excluding spark, or even specific tests.
+
+<img src="images/pytest/i-dont-always-meme.webp" alt="I dont always meme" style="height: 350px;"/>
+
+Create a file called pytest.ini in the Project folder (TODO I'm not sure if this is the best place for it).
+
+    [pytest]
+    addopts = --strict-markers
+    markers =
+        is_spark: marks tests requiring a spark session (deselect with '-m "not is_spark"')
+
+With pytest you can add flags and then only run the tests with those flags (or only tests without those flags).
+It is good practice to add the --strict-markers at the top. Any tests with a flag not mentioned in pytest.ini will trigger an error.
+
+Here I've created an 'is_spark' flag and added it to the relavent tests using the pytest.mark decorator
+
+    def test_always_passes(self):
+        ...
+
+    def test_add_one(self):
+        ...
+
+    @pytest.mark.is_spark
+    def test_can_agg(self, spark):
+        ...
+
+    @pytest.mark.is_spark
+    def test_can_do_other_agg(self, spark):
+        ...
+
+Running the tests with the -m parameter will run just the tests with the flag selected
+
+    pytest -s -m is_spark tests/
+
+Withing the output you can see `collected 4 items / 2 deselected / 2 selected` showing on the the ones we wanted were ran.
+
+To run with the inverse of the flag, all the none spark tests use the 'not' word in front of the flag i.e.
+
+    pytest -s -m "not is_spark" tests/
+
+This set of tests should run super quick as there is now spark session to create.
+
+You can run tests based on a keyword in the test name i.e. this will just run the tests with the word 'add' in the name.
+
+    pytest -s tests/ -k 'add'
+
+The -k parameter takes an expression so you can build some pretty complex filters for your test run.
+
+# Notes
+
+There are still somethings I'm unsure off with this setup
+
+ - Tests ran a lot quicker on bitbucket pipelines than when ran locally. I don't think bb pipelines run on super beefy machines but I seen full tests sets take 2 hours to run locally and then 20 minutes on the pipeline. 
+ - The docker image should start off a single spark instance and then all the tests connect to that for their spark session.
+ - Spark.shutdown() I could never get working cleanly. The session was always closed before the teardown. 
+
+Things I couldn't get working for this article but weren't really essential
+
+ - Keeping the docker image open needed nasty hacks. I would have liked to use docker compose.
+ - I'm not sure why I needed to install pyspark on the spark image
+
+# Fin
+
+I do like pytest. I went through an excellent tutorial by [Mika Tebeka on linkedin](https://www.linkedin.com/learning/testing-python-data-science-code/testing-scientific-applications?autoplay=true&u=140446626). He shows how to add a lot more power to your tests especially if you have data science applications and have the uncertainty/accuracy to deal with.
+
+Final call to arms - ensure you match your library versions to you production environment else it could bite you in the ass.
