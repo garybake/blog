@@ -1,8 +1,8 @@
 Title: Testing pyspark with pytest
-Date: 2023-1-12 09:25
+Date: 2023-1-15 09:25
 Tags: spark, pyspark, pytest, testing
 Category: Python
-Slug: python
+Slug: pyspark_pytest
 
 # Using pytest to test your pyspark code
 
