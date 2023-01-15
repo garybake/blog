@@ -6,7 +6,7 @@ Slug: python
 
 # Using pytest to test your pyspark code
 
-In my past couple of roles I've used pyspark and needed to to add tests to the code as part of the CI pipeline.
+In my past couple of roles I have been developing on the pyspark platform and needed to to add tests to the code as part of the CI pipeline.
 I couldn't really find much out there that describes the process neatly, mostly a couple of stackoverflow questions. 
 
 <img src="images/pytest/drake_test.jpeg" alt="drake meme" style="height: 270px;"/>
@@ -43,14 +43,15 @@ RUN mkdir -p /app
 WORKDIR /app/Project
 ```
 
-Here we use the official pyspark 3.3.1 docker base image, installs the pyspark and pytest libraries and creates the project folder. 
+Here we use the official pyspark 3.3.1 docker base image. Then we install the pyspark and pytest libraries and create the project folder. 
 
 <img src="images/pytest/spark-meme.jpeg" alt="spark meme" style="height: 270px;"/>
 
-You can use a dockerfile as part of your CI pipeline on with [bitbucket pipelines](https://bitbucket.org/product/features/pipelines) which boots the image, runs the tests and then clear it all out. 
+You can use a dockerfile as part of your CI pipeline with [bitbucket pipelines](https://bitbucket.org/product/features/pipelines) which boots the image, runs the tests and then clears it all out. 
 
 One important thing to take note is that you **need to match the versions in your test environment to your production environment** else your tests can be invalid.
 You need to find and match the versions of
+
  - Java
  - Spark
  - Python
@@ -78,12 +79,12 @@ Lets create a noddy app to test
 
 <img src="images/pytest/got_meme.jpeg" alt="got meme" style="height: 270px;"/>
 
-in Project/src/main.py
+in `Project/src/main.py`
 
     def add_one(val):
         return val + 1
 
-Add the file for the tests in Project/tests/test_something.py
+Add the file for the tests in `Project/tests/test_something.py`
 
     class TestMe:
 
@@ -95,16 +96,13 @@ Add the file for the tests in Project/tests/test_something.py
 
 I've added a quick test that always passes. You wouldn't put this in any normal code but it helps to show you have your environment setup correctly.
 
-I don't intend this to be an article about the best ways to write tests, just to say I find it easier to use one test class per file. That class should represent one object in the app or an endpoint. Then that class should contain a barrage of tests for that object. Also I haven't added any notes to the code.
+I don't intend this to be an article about the best ways to write tests, just to say I find it easier to use one test class per file. That class should represent one object in the app or an endpoint. Then that class should contain a barrage of tests for that object. Also I haven't added any comments to the code or type hints.
 
--TODO should probably add type hints-
-
-
-To run the tests ensure you are in the /app/Project directory and run the following
+To run the tests ensure you are in the docker container and in the `/app/Project` directory and run the following
 
     pytest tests/
 
-This will run all of the tests in the test directory. Anything in a file called test_*.py  -TODO which files/functions exactly?-
+This will run all of the tests in the test directory. Anything in files called test_*.py.
 
 
     root@fc85736f011c:/app/Project# pytest tests/
@@ -159,7 +157,7 @@ To show everything output to the console including on passing tests add the '-s'
 
 <img src="images/pytest/no_spark_meme.jpeg" alt="no spark meme" style="height: 350px;"/>
 
-Imagine that the code below is part of your application that is destined to change the world.  
+Imagine that the code below is part of your mega application that is destined to change the world.  
 
 
 
@@ -189,7 +187,7 @@ There are two functions that do basic aggregations on the passed in dataframe, s
 
 <img src="images/pytest/amitesting.png" alt="am i testubfg" style="height: 350px;"/>
 
-No we are at the beef of this article, you need to test the pyspark code. The first thing you'll need is a spark session. When I built tests previously I had a class (SparkTestCase) that derived from unittest.TestCase. The in the test setUp() function it created the sparksession and attached it as a property of the SparkTestCase. This worked well but pytest has better ways of doing things - [fixtures](https://docs.pytest.org/en/6.2.x/fixture.html)!
+Now we are at the beef of this article, you need to test the pyspark code. The first thing you'll need is a spark session. When I built tests previously I had a class (SparkTestCase) that derived from unittest.TestCase. Then in the unittest setUp() function it created the sparksession and attached it as a property of the SparkTestCase. This worked well. Pytest has better ways of doing things - [fixtures](https://docs.pytest.org/en/6.2.x/fixture.html)!
 
 Fixtures are used to feed things into your test and make things more modular and generally neater. There are many builtin fixtures such as tmpdir which creates a temporary folder for your test. They are also used to control the startup and teardown functions of tests.
 
@@ -213,14 +211,14 @@ You are going to have a lot of tests using this functionality so it should be in
         yield spark_session
         print("teardown")
 
-The fixture has the fixture decorator. Here we are using the startup and teardown functionality. For this we do the setup, yield what we need to the calling test and then do whatever teardown is needed. A pseudo code example may help
+We are going to create our own spark fixture. The fixture has the @fixture decorator. Here we are using the startup and teardown functionality. For this we do the setup, yield what we need to the calling test and then do whatever teardown is needed. A pseudo code example may help
 
-    run initial code in fixture
-    pass objects to test
-    run a test
+    run initialization/startup code in fixture
+    create objects and pass them to the test
+    run the test
     run tear down code in fixture
 
-In the file that runs the tests Project/tests/test_something.py
+In the file that runs the tests `Project/tests/test_something.py`
 
 
     import pytest
@@ -271,35 +269,35 @@ In the file that runs the tests Project/tests/test_something.py
             assert out[1]['maxval'] == 55
 
 
-At the top we import the object to test (SuperDataTransformer) and the fixtures for spark.
+At the top we import the object to test (SuperDataTransformer) and the our spark fixture.
 
-The first method is get_data. This builds a dataframe for use in the tests. I find having it generated in a single place saves on duplication below. You can have a number of these data generator methods if you are testing different parts of a pipeline. Each test should be isolated so you should know what data is being passed into the function.
+The first method is `get_data()`. This builds a dataframe with data for use in the tests. I find having it generated in a single place saves on duplication. You can have a number of these data generator methods if you are testing different parts of a pipeline. Each test should be isolated so you should know what data is being passed into the function.
 
-A spark session is required for creating the dataframe so this is passed in as a parameter. When the dataframe is returned, one thing I found helpful was to add .coalesce(1). This reduces the number of partitions of the data down to 1 and makes the tests run slightly faster. With the low volume of data we have in the tests this saves time on shuffling.
+A spark session is required for creating the dataframe so this is passed in as a parameter. When the dataframe is returned, one thing I found helpful was to add `.coalesce(1)`. This reduces the number of partitions of the dataframe down to a single partition and makes the tests run slightly faster. With the low volume of data we have in the tests this saves time on shuffling.
 
 I'll focus on just the first test as the second one is pretty much the same
 
-The spark session (spark) is passed in as a parameter from the fixture.
-The dataframe is created
-The object under test is created
-The function this test is testing is ran using the test dataframe
-A test to check the correct columns are in the output. We can check here before collecting the data as we want it to fail fast and spark keeps a record of the columns without running everything.
-Then we collect the output of the function. Spark doesn't guarantee any order so it is reccomended to sort the output to ensure it is consistent.
-(at this point is may be handy to print )
+1. The spark session (spark) is passed in as a parameter from the fixture.
+2. The dataframe is created
+3. The object under test is created
+4. The function this test is testing is ran using the test dataframe
+5. A test to check the correct columns are in the output. We can check here before collecting the data as we want it to fail fast and spark keeps a record of the columns without running everything.
+6. Then we collect the output of the function. Spark doesn't guarantee any order so it is reccomended to sort the output to ensure it is consistent.
+7. From here the tests are ran how you would normally build tests. Test for length, types, individual fields in the rows etc.
 
-If you print the 'out' variable at this point you will see something like 
+If you print the 'out' variable just after the `collect()` you will see something like 
 
     [Row(name='abc1', sumval=45), Row(name='def2', sumval=132)]
 
-From here the tests are ran how you would normally build tests. Test for length, types, individual fields in the rows etc.
+This is the structure you are running tests against.
 
 # Running sets of tests
 
-Spark tests can take time to run. Sometimes you may want to run just the spark or all the tests excluding spark, or even specific tests.
+Spark tests can take time to run. Sometimes you may want to run just the spark tests or all the tests excluding spark, or even specific tests.
 
 <img src="images/pytest/i-dont-always-meme.webp" alt="I dont always meme" style="height: 350px;"/>
 
-Create a file called pytest.ini in the Project folder (TODO I'm not sure if this is the best place for it).
+Create a file called `pytest.ini` in the Project folder _(TODO I'm not sure if this is the best place for it)_.
 
     [pytest]
     addopts = --strict-markers
@@ -307,7 +305,7 @@ Create a file called pytest.ini in the Project folder (TODO I'm not sure if this
         is_spark: marks tests requiring a spark session (deselect with '-m "not is_spark"')
 
 With pytest you can add flags and then only run the tests with those flags (or only tests without those flags).
-It is good practice to add the --strict-markers at the top. Any tests with a flag not mentioned in pytest.ini will trigger an error.
+It is good practice to add the `--strict-markers` at the top. Any tests with a flag not mentioned in pytest.ini will then trigger an error.
 
 Here I've created an 'is_spark' flag and added it to the relavent tests using the pytest.mark decorator
 
@@ -325,23 +323,23 @@ Here I've created an 'is_spark' flag and added it to the relavent tests using th
     def test_can_do_other_agg(self, spark):
         ...
 
-Running the tests with the -m parameter will run just the tests with the flag selected
+Running the tests with the -m parameter will run just the tests that have the flag.
 
     pytest -s -m is_spark tests/
 
-Withing the output you can see `collected 4 items / 2 deselected / 2 selected` showing on the the ones we wanted were ran.
+Within the test output you can see `collected 4 items / 2 deselected / 2 selected` showing only the the ones we wanted were ran.
 
-To run with the inverse of the flag, all the none spark tests use the 'not' word in front of the flag i.e.
+To run with the inverse of the flag, all the none spark tests, use the 'not' word in front of the flag i.e.
 
     pytest -s -m "not is_spark" tests/
 
-This set of tests should run super quick as there is now spark session to create.
+This set of tests should run super quick as there is no spark session to create.
 
 You can run tests based on a keyword in the test name i.e. this will just run the tests with the word 'add' in the name.
 
     pytest -s tests/ -k 'add'
 
-The -k parameter takes an expression so you can build some pretty complex filters for your test run.
+The [-k parameter](https://docs.pytest.org/en/7.1.x/example/markers.html#using-k-expr-to-select-tests-based-on-their-name) takes an expression so you can build some pretty complex filters for your test run.
 
 # Notes
 
@@ -349,12 +347,13 @@ There are still somethings I'm unsure off with this setup
 
  - Tests ran a lot quicker on bitbucket pipelines than when ran locally. I don't think bb pipelines run on super beefy machines but I seen full tests sets take 2 hours to run locally and then 20 minutes on the pipeline. 
  - The docker image should start off a single spark instance and then all the tests connect to that for their spark session.
- - Spark.shutdown() I could never get working cleanly. The session was always closed before the teardown. 
+ - `Spark.shutdown()` I could never get working cleanly. The session was always closed before the teardown. 
+ - Should the dataframe from get_data() be created using a fixture?
 
-Things I couldn't get working for this article but weren't really essential
+Things I couldn't get working for this article but weren't really essential.
 
  - Keeping the docker image open needed nasty hacks. I would have liked to use docker compose.
- - I'm not sure why I needed to install pyspark on the spark image
+ - I'm not sure why I needed to install the pyspark library on the spark image.
 
 # Fin
 
