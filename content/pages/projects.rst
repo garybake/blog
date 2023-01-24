@@ -10,6 +10,16 @@ Projects
 
 Other things I have built in the past
 
-* `Lyrics Generator <http://garybake.com/projects/lyrics/>`_.
+* `Cuisine Prediction <https://garybake.pythonanywhere.com/>`_.
   
-  Using Markov chains to generate lyrics
+  Predict the type of cuisine from the list of ingredients.
+
+* `BakeX Lander <https://youtu.be/mG10BXHrOw0>`_.
+  
+  AI based lander using reinforcement learning.
+
+* `Lyrics Generator <https://garybake.com/projects/lyrics/>`_.
+  
+  Using Markov chains to generate lyrics.
+
+
