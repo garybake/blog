@@ -6,10 +6,10 @@ Slug: pyspark_pytest
 
 # Using pytest to test your pyspark code
 
+![drake meme]({filename}/images/pytest/drake_test.jpg)  
+
 In my past couple of roles I have been developing on the pyspark platform and needed to to add tests to the code as part of the CI pipeline.
 I couldn't really find much out there that describes the process neatly, mostly a couple of stackoverflow questions. 
-
-<img src="images/pytest/drake_test.jpeg" alt="drake meme" style="height: 270px;"/>
 
 Originally I used unittest but recently switched over to use pytest. I find it a lot cleaner to use and the tests are easier to read.
 
@@ -45,7 +45,7 @@ WORKDIR /app/Project
 
 Here we use the official pyspark 3.3.1 docker base image. Then we install the pyspark and pytest libraries and create the project folder. 
 
-<img src="images/pytest/spark-meme.jpeg" alt="spark meme" style="height: 270px;"/>
+![spark meme]({filename}/images/pytest/spark-meme.jpg)  
 
 You can use a dockerfile as part of your CI pipeline with [bitbucket pipelines](https://bitbucket.org/product/features/pipelines) which boots the image, runs the tests and then clears it all out. 
 
@@ -77,7 +77,7 @@ TODO: I tried getting the docker-compose working but it was really hacky to get 
 
 Lets create a noddy app to test
 
-<img src="images/pytest/got_meme.jpeg" alt="got meme" style="height: 270px;"/>
+![got meme]({filename}/images/pytest/got_meme.jpg)
 
 in `Project/src/main.py`
 
@@ -155,7 +155,7 @@ To show everything output to the console including on passing tests add the '-s'
 
 # Pyspark
 
-<img src="images/pytest/no_spark_meme.jpeg" alt="no spark meme" style="height: 350px;"/>
+![no spark meme]({filename}/images/pytest/no_spark_meme.jpg)    
 
 Imagine that the code below is part of your mega application that is destined to change the world.  
 
@@ -185,7 +185,7 @@ There are two functions that do basic aggregations on the passed in dataframe, s
 
 # Pyspark tests
 
-<img src="images/pytest/amitesting.png" alt="am i testubfg" style="height: 350px;"/>
+![am i testing]({filename}/images/pytest/amitesting.png)   
 
 Now we are at the beef of this article, you need to test the pyspark code. The first thing you'll need is a spark session. When I built tests previously I had a class (SparkTestCase) that derived from unittest.TestCase. Then in the unittest setUp() function it created the sparksession and attached it as a property of the SparkTestCase. This worked well. Pytest has better ways of doing things - [fixtures](https://docs.pytest.org/en/6.2.x/fixture.html)!
 
@@ -295,7 +295,7 @@ This is the structure you are running tests against.
 
 Spark tests can take time to run. Sometimes you may want to run just the spark tests or all the tests excluding spark, or even specific tests.
 
-<img src="images/pytest/i-dont-always-meme.webp" alt="I dont always meme" style="height: 350px;"/>
+![I dont always meme]({filename}/images/pytest/i-dont-always-meme.jpg)   
 
 Create a file called `pytest.ini` in the Project folder _(TODO I'm not sure if this is the best place for it)_.
 

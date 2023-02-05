@@ -10,7 +10,7 @@ The big sell of the ESP8266 is the embedded wifi. With this entry we'll go throu
 
 #### Get Connected
 
-<img src="images/wifi.png" alt="wifi" style="width: 50px;"/>
+![wifi]({filename}/images/wifi.png)
 
 Connect to the D1 and enter the following into the repl. I'll explain the code a chunk at a time.
 

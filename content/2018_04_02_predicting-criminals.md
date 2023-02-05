@@ -10,7 +10,7 @@ My annotated entry is [here](http://nbviewer.jupyter.org/github/garybake/kaggle_
 
 [Original competition](https://www.hackerearth.com/challenge/competitive/predict-the-criminal/machine-learning/predict-the-criminal/)
 
-<img src="images/jail.png" alt="jail" style="width: 100px;"/>
+![jail]({filename}/images/jail.png)
 
 ####Update
 

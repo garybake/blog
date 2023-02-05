@@ -6,7 +6,7 @@ Slug:
 
 First thing to do is obtain the wemos d1 mini.
 
-![d1_mini](images/d1_mini.jpg)
+![d1_mini]({filename}/images/d1_mini.jpg)
 
 Currently they can be bought from the [wemos store on ali express](http://s.click.aliexpress.com/e/zfeyfIaub) for £3.08 each with free p&p.
 

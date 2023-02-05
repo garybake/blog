@@ -6,7 +6,7 @@ Slug: wemos-oled-shield
 
 I was going to write about setting up a server with the D1 but got overexcited about the OLED screen so I'm doing that first.
 
-<img src="images/oled/oled_500.jpg" alt="wifi" style="width: 100px;"/>
+![wifi]({filename}/images/wifi.png)
 
 This is a shield for the Wemos D1 mini and built by the same people. 
 It's a 64x48 oled screen that can be mounted on the d1 really easily.
@@ -72,7 +72,7 @@ This means we can show words like zizzling and flapjack but not jazziness or huz
 
 Lastly we have ```display.show()```. This copies our buffer screen to the actual screen and then wham there's your greeting!
 
-<img src="images/oled/hello.jpg" alt="hello" style="width: 200px;"/>
+![hello]({filename}/images/oled/hello.jpg)
 
 #### Controls
 
@@ -136,7 +136,7 @@ draw_line(display,1,2,40,11)
 display.show()
 ```
 
-<img src="images/oled/line.jpg" alt="wifi" style="width: 100px;"/>
+![line]({filename}/images/oled/line.jpg)
 
 #### Circles
 
@@ -176,7 +176,7 @@ for r in range(10):
 display.show()
 ```
 
-<img src="images/oled/circles.jpg" alt="wifi" style="width: 100px;"/>
+![circles]({filename}/images/oled/circles.jpg)
 
 I've created a repository to hold bigger demos of the wemos shields.
 For the oled I've added a demo that bounces a ball round the screen [here](https://github.com/garybake/upython_wemos_shields/tree/master/oled).
@@ -192,7 +192,7 @@ It shouldn't be too difficult to create the old windows screen-savers, of bounci
 
 Just an update to the post. I managed to get the micropython logo showing on the screen and it looks pretty neat.  
 
-<img src="images/oled/upy_logo.jpg" alt="upy logo" style="width: 200px;"/>
+![upy_logo]({filename}/images/oled/upy_logo.jpg)
 
 The repo is [here](https://github.com/garybake/upython_wemos_shields/tree/master/oled). I needed to convert the image to an array locally using python/numpy.
 If I get time I'll try to remove the numpy dependancy.

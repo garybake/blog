@@ -9,7 +9,7 @@ Slug: mario-learning
 Now we have everything set up and the basic random policy. Mario would have to be super lucky to get anywhere with this.
 It's time to improve the policy.
 
-<img src="images/rl/mario-learning.jpg" alt="mario reading" style="height: 270px;"/>
+![mario learning]({filename}/images/rl/mario-learning.jpg)
 
 I'm going to use the reinforcement learning technique of deep Q-learning.
 
@@ -181,9 +181,11 @@ Maybe there will Step 5 if I can get it working
 
 Finally a shoutout to a book that has been really helpful for me learning deep learning. It's written by the author of the keras library, and it's really approachable and understandable. I can't recommend it enough.
 
-[Deep Learning with python by François Chollet](https://www.manning.com/books/deep-learning-with-python)
+*(edited 05/02/23 to show second edition of book)*
 
-<img src="images/rl/keras_book.jpg" alt="mario reading" style="height: 200px;"/>
+[Deep Learning with python by François Chollet](https://www.manning.com/books/deep-learning-with-python-second-edition)
+
+![Keras Book]({filename}/images/rl/keras_book.jpg)
 
 ### Links
 

@@ -40,7 +40,7 @@ This may or may not produce a change in the environment
 - **Reward**  
 How good was the change in the environment caused by our last action. This is what we want to maximise.
 
-<img src="images/rl/reinforcement-learning.jpg" alt="rl" style="height: 270px;"/>
+![Markov diagram]({filename}/images/rl/Markov_diagram_v2.svg.png)
 
 In our mario world each timestep can be seen as discrete rather than continous. We press a button and the gameboy moves forward one tick.
 There are RL methods to handle continuous time but discrete keeps things a lot simpler.

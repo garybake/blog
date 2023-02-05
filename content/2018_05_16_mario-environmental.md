@@ -9,11 +9,11 @@ Slug: mario-environmental
 This is were things get exciting.
 I found a really well documented, well written, python based gameboy emulator - [PyBoy](https://github.com/Baekalfen/PyBoy)
 
+![robot]({filename}/images/gameboy/roboplay.jpg)
+
 I fired it up and all of the games I tried worked perfectly.
 
 Next step is to have a play with its api. There is a good example of [automating tetris](https://github.com/Baekalfen/PyBoy/blob/master/Source/tetris_bot.py)
-
-<img src="images/gameboy/roboplay.jpg" alt="robot" style="height: 100px;"/>
 
 First thing is to create a PyBoy instance to interact with and load a rom file.
 Then we can send key presses on certain frames.
@@ -67,7 +67,8 @@ pyboy.getSprite(3).is_on_screen():
 I had an action replay (AR) when I was younger. It had a really cool thing where you could generate your own cheats.
 We can use this same method to find pretty much any (volatile) information from a game.
 
-<img src="images/gameboy/proactionreplay.jpg" alt="action replay" style="height: 100px;"/>
+![action replay]({filename}/images/gameboy/proactionreplay.jpg)
+
 
 For example to get infinite lives in a game with the AR the steps are:  
 (Abridged from vague memories)

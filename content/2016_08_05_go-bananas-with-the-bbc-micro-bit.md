@@ -44,7 +44,7 @@ I built a couple of [scripts](https://github.com/garybake/microbake) whilst I wa
 There are 3 outputs big enough for the crocodile clips. We are using one for the buzzer, so we have 2 left to use as switches; hence only 2 notes.  
 But more than enough to play Happy Birthday!
 
-<img src="images/microbit/bananapiano_schem.png" alt="circuit" style="width: 300px;"/>
+![circuit]({filename}/images/microbit/bananapiano_schem.png)
 
 I couldn't find a fritzing pic of the micropython. Even worse - I don't think there is an official circuit symbol for banana!
 
