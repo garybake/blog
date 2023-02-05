@@ -10,7 +10,7 @@ Another year another resolution to write more. I should probably see when my las
 
 Damn, my site is broke! How embarrasing.
 
-<img src="images/fixthings/support_team.jpg" alt="gandalf memory" style="height: 270px;"/>
+![Support Team]({filename}/images/fixthings/support_team.jpg)
 
 A quick check and it looks like I was using a mix of http and https; this shows how long it was since the last update.
 
@@ -24,7 +24,7 @@ This shouldn't be a problem, all links should be relative to the root page and u
 
 If I'm going to create more amazing masterpiece posts this year then I need to crack open the code and check everything still works.
 
-<img src="images/fixthings/gandalf_no_memory.jpg" alt="gandalf memory" style="height: 270px;"/>
+![gandalf memory]({filename}/images/fixthings/gandalf_no_memory.jpg)  
 
 I haven't use this software in a while. This isn't helped by me not documenting and taking various shortcuts. 
 
@@ -56,7 +56,7 @@ Why did I add notes to a scratch file? There is a readme right there asking for 
 
 #### 3 -  Get it working properly  
 
-<img src="images/fixthings/python2.jpeg" alt="gandalf memory" style="height: 270px;"/>
+![python2]({filename}/images/fixthings/python2.jpg)  
 
 I think it uses python 2! or at least the generated files did. In 2016 when I generated the configs I was using python 2 in my role and I guess I had used that laptop. Anyways, I generated a blank pelican project and checked for any major differences. It looks like the only main change is to remove some polyfill imports and remove the unicode flag from the start of some strings. Easier than I thought, phew!
 
