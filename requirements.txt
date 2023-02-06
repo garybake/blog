@@ -1,5 +1,5 @@
-pelican
-fabric
-livereload
-Markdown
+pelican==4.8.0
+fabric==2.7.1
+livereload==2.6.3
+Markdown==3.4.1
 pelican-sitemap==1.0.2
