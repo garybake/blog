@@ -2,7 +2,7 @@ Title: Go bananas with the BBC Micro:Bit
 Date: 2016-8-5 12:45
 Tags: fruit, micropython, microbit
 Category: microbit
-Slug: go-bananas-with-the-bbc-micro:bit
+Slug: go-bananas-with-the-bbc-micro_bit
 
 I received the microbit a couple of weeks ago and it's a solid device with plenty of scope for fun times.
 The best thing is that it runs micropython. Yey, go team!
@@ -44,7 +44,7 @@ I built a couple of [scripts](https://github.com/garybake/microbake) whilst I wa
 There are 3 outputs big enough for the crocodile clips. We are using one for the buzzer, so we have 2 left to use as switches; hence only 2 notes.  
 But more than enough to play Happy Birthday!
 
-![circuit]({filename}/images/microbit/bananapiano_schem.png)
+![circuit]({static}/images/microbit/bananapiano_schem.png)
 
 I couldn't find a fritzing pic of the micropython. Even worse - I don't think there is an official circuit symbol for banana!
 
