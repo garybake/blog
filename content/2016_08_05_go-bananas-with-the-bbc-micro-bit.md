@@ -1,4 +1,4 @@
-Title: Go bananas with the BBC Micro:Bit
+Title: Go bananas with the BBC Micro Bit
 Date: 2016-8-5 12:45
 Tags: fruit, micropython, microbit
 Category: microbit
