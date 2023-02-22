@@ -4,6 +4,7 @@ Tags: Blog, Repair
 Category: Blog
 Slug: blog
 Summary: Test post to fix various bugs and generally update the site.
+featured_image: /images/fixthings/support_team.jpg
 
 ## The site is down
 

@@ -4,6 +4,7 @@ Tags: thats, awesome, ML, emulation
 Category: yeah
 Slug: mario-environment-api
 Summary: Part 3. Intro to Reinforcement Learning and creating an Envirnment to test an agent.
+featured_image: /images/rl/Markov_diagram_v2.svg.png
 
 ## Part 3. Build an api for the environment
 

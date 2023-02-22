@@ -4,6 +4,7 @@ Tags: thats, awesome, ML, emulation
 Category: yeah
 Slug: mario-learning
 Summary: Part 4. Explanation of the Q-Learning algorithm and implementation to play super mario land.
+featured_image: /images/rl/mario-learning.jpg
 
 ## Part 4. Reinforcement Learning - Q-Learning
 

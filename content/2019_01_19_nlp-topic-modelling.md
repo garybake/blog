@@ -4,6 +4,7 @@ Tags: NLP, ML, Topic_Modelling
 Category: ML
 Slug: nlp-topic-modelling
 Summary: Topic modelling of a set of documents using NLP and Latent Dirichlet Allocation.
+featured_image: /images/nlp/nlp_book.jpg
 
 ## Topic Modelling
 

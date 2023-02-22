@@ -4,6 +4,7 @@ Tags: thats, awesome, ml, keras
 Category: yeah
 Slug: predicting-criminals
 Summary: Machine learning competition for prediction criminality. Uses deep learning (keras).
+featured_image: /images/jail.png
 
 Using machine learning estimate whether someone is going to commit a crime in the future.
 

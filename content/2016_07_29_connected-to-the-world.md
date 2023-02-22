@@ -4,6 +4,7 @@ Tags: esp8266, micropython
 Category: esp8266
 Slug: connected-to-the-world
 Summary: With micropython and the wemos D1 mini, I show how to connect to the internet and send requests.
+featured_image: /images/wifi.png
 
 We have the d1 mini and able to run python code on it, yey us!
 

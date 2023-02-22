@@ -4,6 +4,7 @@ Tags: esp8266, micropython
 Category: esp8266
 Slug:
 Summary: With micropython and the wemos D1 mini, I show how to get started running micro-python code on the microprocessor.
+featured_image: /images/d1_mini.jpg
 
 First thing to do is obtain the wemos d1 mini.
 

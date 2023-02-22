@@ -4,7 +4,7 @@ Tags: spark, pyspark, pytest, testing
 Category: Python
 Slug: pyspark_pytest
 Summary: Automate testing for pyspark applications using pytest. Includes use of markers and fixtures.
-ReferenceImage: /images/pytest/drake_test.jpg
+featured_image: /images/pytest/drake_test.jpg
 
 ## Using pytest to test your pyspark code
 
