@@ -1,6 +1,7 @@
 AUTHOR = 'Gary Bake'
 SITENAME = 'This and That'
 SITEURL = '' 
+SITEDESCRIPTION = 'Programming, Machine learning and Electronics chit chat'
 
 PATH = 'content'
 
