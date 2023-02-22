@@ -45,6 +45,7 @@ SOCIAL = (('twitter', 'http://twitter.com/MrGaryBake'),
           )
 
 SITELOGO = '/images/face.jpg'
+SITETITLE = 'My face goes here'
 
 PYGMENTS_STYLE = "monokai"
 
