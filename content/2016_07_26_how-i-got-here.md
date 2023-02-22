@@ -3,6 +3,7 @@ Date: 2016-7-26 16:53
 Tags: micropython, esp8266
 Category: esp8266
 Slug: how-i-got-here
+Summary: A basic introduction to the ESP8266 and dev boards.
 
 I made a new years resolution to get into electronics.  
 Then I discovered [aliexpress](http://s.click.aliexpress.com/e/AeYba2fQV) and it became a super cheap new hobby.

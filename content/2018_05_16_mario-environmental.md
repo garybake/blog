@@ -3,6 +3,7 @@ Date: 2018-5-16 22:25
 Tags: thats, awesome, ML, emulation
 Category: yeah
 Slug: mario-environmental
+Summary: Part 2. Programatic control of a gameboy emulator and super mario land.
 
 ## Part 2. Explore the mario environment
 

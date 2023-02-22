@@ -3,6 +3,7 @@ Date: 2016-8-2 12:17
 Tags: esp8266, micropython, oled
 Category: esp8266
 Slug: wemos-oled-shield
+Summary: With micropython and the D1 mini, I show how to generate images in an OLED screen.
 
 I was going to write about setting up a server with the D1 but got overexcited about the OLED screen so I'm doing that first.
 

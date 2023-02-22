@@ -1,5 +1,5 @@
 AUTHOR = 'Gary Bake'
-SITENAME = 'This and That'
+SITENAME = 'Programming, Machine learning and Electronics chit chat'
 SITEURL = '' 
 SITEDESCRIPTION = 'Programming, Machine learning and Electronics chit chat'
 

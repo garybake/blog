@@ -3,6 +3,7 @@ Date: 2016-8-5 12:45
 Tags: fruit, micropython, microbit
 Category: microbit
 Slug: go-bananas-with-the-bbc-micro-bit
+Summary: Using the microbit and micro-python to play music with a banana!
 
 I received the microbit a couple of weeks ago and it's a solid device with plenty of scope for fun times.
 The best thing is that it runs micropython. Yey, go team!

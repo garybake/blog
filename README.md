@@ -75,3 +75,11 @@ Microbit
 Add display functions  
 http://hoardedhomelyhints.dietbuddha.com/2012/12/python 
 - metaprogramming - dynamically.html
+
+
+Dev notes
+---------
+I'll forget that I need this information
+
+Update Flex/templates/partial/sidebar.html
+Change the <h1>...SITETITLE...</h1> to be <h2> tags. This fixes SEO complaining about having more than one H1 tags in the page.
