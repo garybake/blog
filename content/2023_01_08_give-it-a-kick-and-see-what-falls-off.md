@@ -4,7 +4,7 @@ Tags: Blog, Repair
 Category: Blog
 Slug: blog
 
-# The site is down
+## The site is down
 
 Another year another resolution to write more. I should probably see when my last post was.  
 
@@ -14,13 +14,13 @@ Damn, my site is broke! How embarrasing.
 
 A quick check and it looks like I was using a mix of http and https; this shows how long it was since the last update.
 
-# The site is up
+## The site is up
 
 It was quick enough to fix, just updating the links in the page. 
 
 This shouldn't be a problem, all links should be relative to the root page and use the same protocol. I'm using a static site generator ([pelican](https://getpelican.com/)), so either I or the generator is doing these shenanigans.
 
-# Fix the things
+## Fix the things
 
 If I'm going to create more amazing masterpiece posts this year then I need to crack open the code and check everything still works.
 
@@ -28,7 +28,7 @@ If I'm going to create more amazing masterpiece posts this year then I need to c
 
 I haven't use this software in a while. This isn't helped by me not documenting and taking various shortcuts. 
 
-## Restart  
+### Restart  
 
 #### 1 - Get it working  
 

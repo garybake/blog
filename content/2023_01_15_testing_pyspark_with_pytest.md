@@ -4,7 +4,7 @@ Tags: spark, pyspark, pytest, testing
 Category: Python
 Slug: pyspark_pytest
 
-# Using pytest to test your pyspark code
+## Using pytest to test your pyspark code
 
 ![drake meme]({static}/images/pytest/drake_test.jpg)  
 
@@ -15,7 +15,7 @@ Originally I used unittest but recently switched over to use pytest. I find it a
 
 The code for this post can be found on [github](https://github.com/garybake/pyspark_pytest)  
 
-# Basic pytest
+## Basic pytest
 
 I'll start with getting a normal test running with pytest. It's a noddy project used to illustrate the code. The layout of the project is
 
@@ -28,7 +28,7 @@ I'll start with getting a normal test running with pytest. It's a noddy project 
 
 With the main code for the app going in src and tests in test. There is a root folder above this that also contains some setup files, I'll talk about these when needed.
 
-# Docker
+## Docker
 
 Spark can be a bit of a faff to setup, especially on windows. Docker makes this a million times easier. The dockerfile is pretty basic for what we need.
 
@@ -73,7 +73,7 @@ For windows
 
 TODO: I tried getting the docker-compose working but it was really hacky to get the box to stay running.
 
-# Pytest
+## Pytest
 
 Lets create a noddy app to test
 
@@ -153,7 +153,7 @@ To show everything output to the console including on passing tests add the '-s'
     pytest -s tests/
 
 
-# Pyspark
+## Pyspark
 
 ![no spark meme]({static}/images/pytest/no_spark_meme.jpg)    
 
@@ -183,7 +183,7 @@ Imagine that the code below is part of your mega application that is destined to
 
 There are two functions that do basic aggregations on the passed in dataframe, sum and max. The functions are part of a class that could be part of a pipeline.
 
-# Pyspark tests
+## Pyspark tests
 
 ![am i testing]({static}/images/pytest/amitesting.png)   
 
@@ -291,7 +291,7 @@ If you print the 'out' variable just after the `collect()` you will see somethin
 
 This is the structure you are running tests against.
 
-# Running sets of tests
+## Running sets of tests
 
 Spark tests can take time to run. Sometimes you may want to run just the spark tests or all the tests excluding spark, or even specific tests.
 
@@ -341,7 +341,7 @@ You can run tests based on a keyword in the test name i.e. this will just run th
 
 The [-k parameter](https://docs.pytest.org/en/7.1.x/example/markers.html#using-k-expr-to-select-tests-based-on-their-name) takes an expression so you can build some pretty complex filters for your test run.
 
-# Notes
+## Notes
 
 There are still somethings I'm unsure off with this setup
 
@@ -355,7 +355,7 @@ Things I couldn't get working for this article but weren't really essential.
  - Keeping the docker image open needed nasty hacks. I would have liked to use docker compose.
  - I'm not sure why I needed to install the pyspark library on the spark image.
 
-# Fin
+## Fin
 
 I do like pytest. I went through an excellent tutorial by [Mika Tebeka on linkedin](https://www.linkedin.com/learning/testing-python-data-science-code/testing-scientific-applications?autoplay=true&u=140446626). He shows how to add a lot more power to your tests especially if you have data science applications and have the uncertainty/accuracy to deal with.
 

@@ -4,7 +4,7 @@ Tags: thats, awesome, ML, emulation
 Category: yeah
 Slug: mario-environmental
 
-# Part 2. Explore the mario environment
+## Part 2. Explore the mario environment
 
 This is were things get exciting.
 I found a really well documented, well written, python based gameboy emulator - [PyBoy](https://github.com/Baekalfen/PyBoy)

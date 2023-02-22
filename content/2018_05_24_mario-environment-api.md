@@ -4,7 +4,7 @@ Tags: thats, awesome, ML, emulation
 Category: yeah
 Slug: mario-environment-api
 
-# Part 3. Build an api for the environment
+## Part 3. Build an api for the environment
 
 Now that we can pull out information from the gameboy environment, why do we need to do this?
 

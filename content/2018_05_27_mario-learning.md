@@ -4,7 +4,7 @@ Tags: thats, awesome, ML, emulation
 Category: yeah
 Slug: mario-learning
 
-# Part 4. Reinforcement Learning - Q-Learning
+## Part 4. Reinforcement Learning - Q-Learning
 
 Now we have everything set up and the basic random policy. Mario would have to be super lucky to get anywhere with this.
 It's time to improve the policy.
