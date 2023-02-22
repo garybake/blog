@@ -79,10 +79,24 @@ http://hoardedhomelyhints.dietbuddha.com/2012/12/python
 
 Dev notes
 ---------
-I'll forget that I need this information
+I'll forget that I need this information. TODO just fork the flex repo!
 
 Update Flex/templates/partial/sidebar.html
 Change the <h1>...SITETITLE...</h1> to be <h2> tags. This fixes SEO complaining about having more than one H1 tags in the page.
 
 Update Flex/templates/index.html
 Line 39 add in alt="article featured image". This fixes SEO complaining about images not having a description on the landing page.
+
+Update Flex/template/partial/ga.html
+Change to the code below to be able to use the new google analytics api.
+
+    {% if GOOGLE_ANALYTICS %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS }}"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', '{{ GOOGLE_ANALYTICS }}');
+    </script>
+    {% endif %}
