@@ -45,7 +45,8 @@ SOCIAL = (('twitter', 'http://twitter.com/MrGaryBake'),
           )
 
 SITELOGO = '/images/face.jpg'
-SITETITLE = 'My face'
+SITETITLE = "Gary Bake's Blog"
+SITESUBTITLE = "Data Science | Data Engineering | Electronics"
 
 PYGMENTS_STYLE = "monokai"
 
