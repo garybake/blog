@@ -16,8 +16,7 @@ If you are interested in looking into NLP (Natural Language Processing) then I h
 
 ![nlp_book]({static}/images/nlp/nlp_book.jpg)
 
-<a href="https://www.amazon.co.uk/Text-Analytics-Python-Real-World-Actionable/dp/148422387X/ref=as_li_ss_il?ie=UTF8&qid=1547889932&sr=8-2&keywords=text+analysis+with+python&linkCode=li3&tag=garybake-21&linkId=d3f95a985815c6dd4fa332ed28f06956&language=en_GB" target="_blank">Text Analytics with Python</a>
-<img src="https://ir-uk.amazon-adsystem.com/e/ir?t=garybake-21&language=en_GB&l=li3&o=2&a=148422387X" width="1" height="1" border="0" alt="book" style="border:none !important; margin:0px !important;" />
+[Text Analytics with Python](https://amzn.to/41BlrLK)
 
 You can view the rendered jupyter content [here](https://nbviewer.jupyter.org/github/garybake/nlp_modelling/blob/master/LDA_study.ipynb) (or link straight the the github repo [here](https://github.com/garybake/nlp_modelling/blob/master/LDA_study.ipynb))
 

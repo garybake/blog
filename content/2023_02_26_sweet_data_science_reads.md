@@ -122,7 +122,7 @@ All this is still relevant today in the data science world. I can download a cut
 
 Turning an idea into a startup used to have real hurdles. Even today roles that create things such as building architects require a huge outlay, or setting up a small store selling baby clothes still carry a risk. Modern software development has a much lower risk.
 
-I added the book as it gives an appreciation of what we have as developers/data scientists. We are a lot less limited and hugely lucky compared to other industries. Having awesome ideas and prototyping on thm is a huge motivation to think big.
+I added the book as it gives an appreciation of what we have as developers/data scientists. We are a lot less limited and hugely lucky compared to other industries. Having awesome ideas and prototyping on them is a huge motivation to think big.
 
   
 ## Final Requests
