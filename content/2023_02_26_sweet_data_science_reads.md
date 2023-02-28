@@ -6,31 +6,30 @@ Slug: data_science_books
 Summary: Sweet reading list for data scientists
 featured_image: /images/books/garybooks.jpg
 
-## Read deez bookz
+## The only data science book list you need today.
 
 ![me reading]({static}/images/books/garybooks.jpg)  
 
 I see a lot of top 10 book lists and many seem a bit spammy and a bit samey.
-Here I want to show a list of books that mean a lot to me and helped me in my career. Not just books on how to do data science but things that are interesting if you are in the field. The latest book covers may differ from the editions below, I just wanted to use the covers from the editions I'd read.
+Here I want to show a list of books that mean a lot to me and helped me in my career. Not just books on how to do data science but things that are interesting if you are in the field. 
 
 ## 1. Hands-on Machine Learning with Scikit-Learn, Keras, and TensorFlow  
 [![Hands-on Machine Learning]({static}/images/books/01_HandsOnMachineLearning.jpg)](https://www.amazon.co.uk/Hands-Machine-Learning-Scikit-Learn-TensorFlow/dp/1492032646)   
 Aurelien Geron  
 ISBN: 978-1492032649  
 
-Hands down my favourite book so naturally goes first. It's my go to bible for any machine learning concepts. My old copy was well thumbed and thankfully a second edition means I have a neater copy on my shelf. This book has everything you need to start in machine learning, all of the core algorithms and metrics, all explained in a really clear way. 
+Hands down my favourite book, so naturally goes first. It's my go to bible for any machine learning concepts. My old copy was well thumbed and thankfully a second edition means I have a neater up-to-date copy on my shelf. This book has everything you need to start in machine learning, all of the core algorithms and metrics, all explained in a really clear way. It has the maths in there but done at the right level to help you understand the concepts. It covers the 'why' of certain technique's along with where they aren't so strong.
 
-I haven't used the second half - the deep learning half - of the book as much, I had another amazing book for that.
+I haven't used the second half - the deep learning half - of the book as much, I had another amazing book for that (see #2 below).
 
 ## 2. Deep Learning with Python  
 [![Deep Learning with Python]({static}/images/books/02_DeepLearningWithPython.jpg)](https://www.amazon.co.uk/Learning-Python-Second-Fran%C3%A7ois-Chollet/dp/1617296864)  
 François Chollet  
 ISBN: 978-1617296864  
 
-
 My second favourite DS book. Also recently updated to a second edition so I have a fresh copy. (Congratulations to the people on facebook who received my donated first editions). 
 
-This is the book that helped me to learn about deep learning and all the fun of neural networks. The book is based on Keras and written by the author of Keras. It's a really dense book but again everything is explained in an easily digestible way. Along with fastapi and pyspark, keras has a special place in my list of favourite libraries. It's so clear and easy to use. 
+This is the book that helped me to learn about deep learning and all the fun of neural networks. The book is based on Keras and written by the author of Keras. It's a really dense book but again everything is explained in an easily digestible way. Along with fastapi and pyspark, keras has a special place in my list of favourite libraries. It's so clear and easy to use. You'll be building dog image detectors in no time.
 
 I'm just a little sad that I'm moving over to pytorch and haven't found a book that matches Chollet's readability.
 
