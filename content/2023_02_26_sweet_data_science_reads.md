@@ -4,11 +4,11 @@ Tags: books
 Category: Python
 Slug: data_science_books
 Summary: Sweet reading list for data scientists
-featured_image: /images/books/garybooks.jpg
+featured_image: /images/books/books_window.jpg
 
 ## The only data science book list you need today.
 
-![me reading]({static}/images/books/garybooks.jpg)  
+![me reading]({static}/images/books/books_window.jpg)  
 
 I see a lot of top 10 book lists and many seem a bit spammy and a bit samey.
 Here I want to show a list of books that mean a lot to me and helped me in my career. Not just books on how to do data science but things that are interesting if you are in the field. 
