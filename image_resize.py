@@ -3,8 +3,8 @@ from PIL import Image
 
 SHOW_IMAGES = False
 
-IMAGE_NAME = "vector_database/king_queen.png"
-BASE_FOLDER = r"D:\dev\python\blog\content\images"
+IMAGE_NAME = os.path.join('vector_database', 'distractedbf.jpg')
+BASE_FOLDER = os.path.join('content', 'images')
 
 image_file = os.path.join(BASE_FOLDER, IMAGE_NAME)
 img = Image.open(image_file)
@@ -20,9 +20,8 @@ def shrink_image(im):
     wsize = int((float(im.size[0]) * float(wpercent)))
     im = im.resize((wsize, base_height), Image.ANTIALIAS)
     return im
-    # img.save('resized_image.jpg')
 
 shrunk = shrink_image(img)
 shrunk.show()
 
-shrunk.save(image_file + '.res.png')
+shrunk.save(image_file + '.res.jpg')
