@@ -59,7 +59,23 @@ There are many things you can do with this technology
  - Look for clusters in the space and use that to tag your data
  - Anomaly detection - why is this document far away from any others?
  - Matching texts roles to resumes, dating 
+ - Deduplication of documents
 
 With the recent explosion in generative AI you should soon be able to the following
  - Generate summaries of documents (you can already do this)
  - Move the document around the space. Imagine being able to make a document less aggressive sounding or maybe make everything a bit more geography related.
+ - What is the difference between these documents.
+
+### Fast search
+
+If we have millions of documents how can we efficiently search them? The R-tree doesn't scale to large numbers of vectors. 
+
+One of the most popular vector index types is HNSW (Hierarchical Navigable Small World). This trades insert time for improved query time.
+
+The video below explains it really well
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/QvKMwLjdK-s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### The fun part
+
+Part 2 of this article, an example build using a vector database can be found (here)[todo]
