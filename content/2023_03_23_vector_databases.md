@@ -78,4 +78,4 @@ The video below explains it really well
 
 ### The fun part
 
-Part 2 of this article, an example build using a vector database can be found (here)[todo]
+Part 2 of this article, an example build using a vector database can be found [here](vector_database_application.html)
