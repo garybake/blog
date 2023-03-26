@@ -18,8 +18,15 @@ Our cutting edge app is named **"Enronalyse"**. Thank you GPT4 for coming up wit
 
 The repository is [here](https://github.com/garybake/enronalyse)
 
+I'm using [Weaviate](https://weaviate.io/) as the vector database of choice. It has a really clean api and great documentation for getting you started.
+
 ## Dataset
 
 The first thing is to download the data and get it into a nice ingestible format.
 
 The source can be found [here](https://www.cs.cmu.edu/~enron/), it's pretty big at 1.7Gb. Don't worry if you are still on dial up I'll share a sample of it pickled in the repo (TODO remember this)
+
+We'll start at the top chairman and CEO, Ken Lay. You only need to extract the `enron_mail_20150507.tar.gz\enron_mail_20150507.tar\maildir\lay-k\` folder and put it somewhere accessable.
+
+## Parse emails
+The code for parsing emails is in the import/import_emails.py file. Its not that complex. 
