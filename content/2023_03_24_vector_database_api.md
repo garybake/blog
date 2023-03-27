@@ -29,4 +29,25 @@ The source can be found [here](https://www.cs.cmu.edu/~enron/), it's pretty big 
 We'll start at the top chairman and CEO, Ken Lay. You only need to extract the `enron_mail_20150507.tar.gz\enron_mail_20150507.tar\maildir\lay-k\` folder and put it somewhere accessable.
 
 ## Parse emails
-The code for parsing emails is in the import/import_emails.py file. Its not that complex. 
+The code for parsing emails is in the `import/import_emails.py` file. Its not that complex. Weaviate expects records formatted as a dictionary.
+
+	{
+	    'send_date': 'Fri, 8 Dec 2000 07:49:00 -0800 (PST)', 
+	    'em_from': 'a.b@enron.com', 
+	    'em_to': None, 
+	    'em_cc': None, 
+	    'subject': "a subject", 
+	    'content': "..."
+	}
+
+I'll come back to this later. But for now we have a array of email records with the text in the content field.
+
+## Up and running with weaviate
+
+There are 2 methods to get up and running. Our app will work with either.
+
+### Weaviate hosted
+
+The most easiest way is to use weaviate cloud services. Weavieate give you a free sandbox environment to evaluate the technology.
+
+https://console.weaviate.io/
