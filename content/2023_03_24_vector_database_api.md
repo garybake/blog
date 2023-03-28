@@ -32,7 +32,10 @@ We'll start at the top chairman and CEO, Ken Lay. You only need to extract the `
 
 Add the folder to your .env file, replacing with your own folder. The **/*_ at the end tells python to filter all subfolders and then the files ending in an underscore.
 
-	EMAIL_FOLDER = "./data/KenLayMails/**/*_"
+	EMAIL_FOLDER = "./data/lay-k/**/*_"  # NonWindows
+
+	EMAIL_FOLDER = "data\lay-k\**\*_"    # Windows
+
 
 
 ## Parse emails
@@ -55,7 +58,7 @@ There are 2 methods to get up and running. Our app will work with either. The cl
 
 ### 1. Weaviate hosted
 
-The most easiest way is to use weaviate cloud services. Weavieate give you a free sandbox environment to evaluate the technology.
+The most easiest way is to use weaviate cloud services. Weaviate give you a free sandbox environment to evaluate the technology.
 
 https://console.weaviate.io/
 
@@ -80,5 +83,41 @@ You now have some cutting edge architecture at your disposal, how easy was that!
 
 2. Docker
 
-This method allows you to run your own weavieate instance locally. You'll need to have docker installed.
+This method allows you to run your own weaviate instance locally. You'll need to have docker installed.
 
+The weaviate tutorial has an excellent [piece on their website](https://weaviate.io/developers/weaviate/installation/docker-compose) that generates a docker-compose file for you.
+
+I've attached the one I'm using below
+
+	version: '3.4'
+	services:
+		weaviate:
+			command:
+			- --host
+			- 0.0.0.0
+			- --port
+			- '8080'
+			- --scheme
+			- http
+			image: semitechnologies/weaviate:1.17.5
+			ports:
+			- 8080:8080
+			restart: on-failure:0
+			environment:
+				TRANSFORMERS_INFERENCE_API: 'http://t2v-transformers:8080'
+				QUERY_DEFAULTS_LIMIT: 25
+				AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
+				PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
+				DEFAULT_VECTORIZER_MODULE: 'text2vec-transformers'
+				ENABLE_MODULES: 'text2vec-transformers'
+				CLUSTER_HOSTNAME: 'node1'
+			volumes:
+				- "D:/tmp/weaviate_vol:/var/lib/weaviate"
+		t2v-transformers:
+			image: semitechnologies/transformers-inference:sentence-transformers-multi-qa-MiniLM-L6-cos-v1
+			environment:
+				ENABLE_CUDA: '0'
+
+You will need to change the first part of the volumes parameter to a folder on your local on your machine. This allows us to persist the database between sessions.
+
+You can see there are 2 main containers, the weaviate database and the MiniLM transformer. This is a smaller language model that produces vectors that are 384 elements in length. For comparison the bert model has 768 and ada has 1024. The larger the output means you are storing your data in a larger much richer space. Though you then pay the cost of compute converting the sentences and also the size of the db on disk.
