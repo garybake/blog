@@ -81,7 +81,14 @@ Add the url of the instance to the .env file. It should be the name with the wea
 
 You now have some cutting edge architecture at your disposal, how easy was that!
 
-2. Docker
+You'll also need a vectoriser, something to transform your sentences into vectors. 
+I'd reccomend signing up to [huggingface](https://huggingface.co/). Have a look around, this site is amazing for hosting models.
+Create yourself an access token [here](https://huggingface.co/settings/tokens) and add that token to the .env
+
+
+
+
+### 2. Docker
 
 This method allows you to run your own weaviate instance locally. You'll need to have docker installed.
 
@@ -118,6 +125,70 @@ I've attached the one I'm using below
 			environment:
 				ENABLE_CUDA: '0'
 
-You will need to change the first part of the volumes parameter to a folder on your local on your machine. This allows us to persist the database between sessions.
+You will need to **change the first part of the volumes parameter** to a folder on your local on your machine. This allows us to persist the database between sessions.
 
-You can see there are 2 main containers, the weaviate database and the MiniLM transformer. This is a smaller language model that produces vectors that are 384 elements in length. For comparison the bert model has 768 and ada has 1024. The larger the output means you are storing your data in a larger much richer space. Though you then pay the cost of compute converting the sentences and also the size of the db on disk.
+You can see there are 2 main containers, the weaviate database and the transformer. The transformer uses the [multi-qa-MiniLM-L6-cos-v1](https://huggingface.co/sentence-transformers/multi-qa-MiniLM-L6-cos-v1) model. This is a smaller language model that produces vectors that are 384 elements in length. 
+
+For comparison the bert model has 768 and ada has 1024. The larger the vector size the larger and richer the vector space. Though you then pay the cost of compute converting the sentences, search complexity and also the size of the db on disk. If you look into the weaviate tutorial it's fairly easy to switch out and use openAI, HuggingFace or Cohere apis to generate your vectors. The example below uses the huggingface api setup above.
+
+### Connect and create the class
+
+Lets put some data into the database
+
+![wrong database]({static}/images/vector_database/wrongdatabase.jpg) 
+
+I've created a VDB class that our database interactions talk to.
+The first part is the connection to the database. The connection handles authentication and various API keys but we are keeping it simple so just need the url.
+
+	def connect(self):
+		db_url = os.getenv("VDB_URL")
+		api_key = os.getenv("HUGGINGFACE_API_KEY")
+
+		self.client = weaviate.Client(
+			url=db_url,
+			additional_headers = {
+				"X-HuggingFace-Api-Key": api_key
+			}
+		)
+		return self
+
+The next part is where to store the data. Everything related to email uploading is in the EmailUploader class.
+Weaviate uses the notion of 'classes' (not the same as python classes) which are akin to tables. We are going to store everything in an 'Email' class.
+The easiest example just needs the name and the vectorizer. Later on you can add things like formally declaring the schema for the class.
+
+	class_obj = {
+		"class": "Email",
+		"vectorizer": "text2vec-huggingface"
+	}
+
+The full create schema function looks like this
+
+	def create_schema(self):
+		class_obj = {
+			"class": "Email",
+			"vectorizer": "text2vec-huggingface"  # "text2vec-transformers"
+		}
+
+		db = VDB().connect()
+		# db.client.schema.delete_class("Email")  # uncomment to delete table if needed
+		db.client.schema.create_class(class_obj)
+
+If you are recreating the class you'll need to uncomment the delete line. Trying to overwrite will fail. The database will now have the email class and be ready to accept data.
+
+### Upload data
+
+Inserts are done in batches. It depends on your volume and size of the texts you are uploading. I found I had timeouts when uploading 3000+ full page documents (for another project) and batches of 50 worked well.
+
+	def insert_emails(self, email_data):
+		db = VDB().connect()
+
+		with db.client.batch as batch:
+			batch.batch_size=50
+			for email in email_data:
+				db.client.batch.add_data_object(email, "Email")
+
+
+
+
+check with https://some-endpoint.weaviate.network/v1/objects
+
