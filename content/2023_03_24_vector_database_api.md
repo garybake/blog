@@ -82,9 +82,13 @@ Add the url of the instance to the .env file. It should be the name with the wea
 You now have some cutting edge architecture at your disposal, how easy was that!
 
 You'll also need a vectoriser, something to transform your sentences into vectors. 
-I'd reccomend signing up to [huggingface](https://huggingface.co/). Have a look around, this site is amazing for hosting models.
-Create yourself an access token [here](https://huggingface.co/settings/tokens) and add that token to the .env
+I'd recommend signing up to [OpenAI](https://platform.openai.com/signup). Have a look around, these are the people building the cutting edge.
+Create yourself an access token [here](https://platform.openai.com/account/api-keys) and add that token to the .env
 
+	OPENAI_API_KEY="*****"
+
+Also have a look at [Hugging Face](https://huggingface.co/) this site is amazing for hosting your own models and interacting with other pretty huge models.
+I went with openai for this article because the number of requests you could maker per second was more generous.
 
 
 
@@ -129,7 +133,7 @@ You will need to **change the first part of the volumes parameter** to a folder 
 
 You can see there are 2 main containers, the weaviate database and the transformer. The transformer uses the [multi-qa-MiniLM-L6-cos-v1](https://huggingface.co/sentence-transformers/multi-qa-MiniLM-L6-cos-v1) model. This is a smaller language model that produces vectors that are 384 elements in length. 
 
-For comparison the bert model has 768 and ada has 1024. The larger the vector size the larger and richer the vector space. Though you then pay the cost of compute converting the sentences, search complexity and also the size of the db on disk. If you look into the weaviate tutorial it's fairly easy to switch out and use openAI, HuggingFace or Cohere apis to generate your vectors. The example below uses the huggingface api setup above.
+For comparison the bert model has 768 and ada has 1024. The larger the vector size the larger and richer the vector space. Though you then pay the cost of compute converting the sentences, search complexity and also the size of the db on disk. If you look into the weaviate tutorial it's fairly easy to switch out and use openAI, HuggingFace or Cohere apis to generate your vectors. The example below uses the openai api setup above.
 
 ### Connect and create the class
 
@@ -142,13 +146,10 @@ The first part is the connection to the database. The connection handles authent
 
 	def connect(self):
 		db_url = os.getenv("VDB_URL")
-		api_key = os.getenv("HUGGINGFACE_API_KEY")
+		api_key = os.getenv("OPENAI_API_KEY")
 
 		self.client = weaviate.Client(
-			url=db_url,
-			additional_headers = {
-				"X-HuggingFace-Api-Key": api_key
-			}
+			url=db_url, additional_headers={"X-OpenAI-Api-Key": api_key}
 		)
 		return self
 
@@ -158,7 +159,7 @@ The easiest example just needs the name and the vectorizer. Later on you can add
 
 	class_obj = {
 		"class": "Email",
-		"vectorizer": "text2vec-huggingface"
+		"vectorizer": "text2vec-openai"
 	}
 
 The full create schema function looks like this
@@ -166,7 +167,7 @@ The full create schema function looks like this
 	def create_schema(self):
 		class_obj = {
 			"class": "Email",
-			"vectorizer": "text2vec-huggingface"  # "text2vec-transformers"
+			"vectorizer": "text2vec-openai"
 		}
 
 		db = VDB().connect()
@@ -177,7 +178,7 @@ If you are recreating the class you'll need to uncomment the delete line. Trying
 
 ### Upload data
 
-If this is your first run, its best to try with fewer emails. The get_email_data() function has a max_emails parameter. Set this to something like 20.
+If this is your first run, its best to try with fewer emails. The get_email_data() function has a max_emails parameter. Set this to something like 20 while you get it to work.
 
 Inserts are done in batches. It depends on your volume and size of the texts you are uploading. I found I had timeouts when uploading 3000+ full page documents (for another project) and batches of 50 worked well.
 
@@ -190,9 +191,51 @@ Inserts are done in batches. It depends on your volume and size of the texts you
 				db.client.batch.add_data_object(email, "Email")
 
 
-You can confirm the data has loaded with https://your-database-code.weaviate.network/v1/objects
+You can confirm the data has loaded with https://your-database-code.weaviate.network/v1/objects 
+Once you are confident its working, recreate the email class and upload 500 messages.
 
 ### Query the data
 
 Now we come to the powerful part, using the vector search.
+
 Note. if you run this and get the error 'Model .... is currently loading ...'. You should wait a couple of minutes. It just means the instance is turned off due to it being free and weaviate are rebooting it.
+
+The first part is what information we want returned. Just the main ones will do, as long as 'content' is there.
+
+	search_headers = ["email_id", "send_date", "em_to", "subject", "content"]
+
+
+The next part is the nearText. This is our query text; that gets turned into a point in the vector space and returns the emails nearby to it. We pass the query_term into the function.
+
+	nearText = {
+		"concepts": [query_term],
+	}
+
+Then these are put together into a 'get' query. Also note the row_count of how many rows we want returned.
+
+	result = (
+		db.client.query.get("Email", search_headers)
+		.with_near_text(nearText)
+		.with_limit(row_count)
+		.do()
+	)
+
+The full function is below.
+
+	def query(self, query_term, row_count=2):
+		db = VDB().connect()
+
+		search_headers = ["email_id", "send_date", "em_to", "subject", "content"]
+
+		nearText = {
+			"concepts": [query_term],
+		}
+
+		result = (
+			db.client.query.get("Email", search_headers)
+			.with_near_text(nearText)
+			.with_limit(row_count)
+			.do()
+		)
+
+		return result
