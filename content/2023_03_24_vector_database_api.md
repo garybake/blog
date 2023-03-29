@@ -10,7 +10,7 @@ featured_image: /images/vector_database/distractedbf.jpg
 
 ![distracted me]({static}/images/vector_database/distractedbf.jpg) 
 
-As a nosy person one of my fave datasets is the [Enron emails](https://en.wikipedia.org/wiki/Enron_Corpus). You can even get to know the people a bit more with the [documentary](https://www.imdb.com/title/tt1016268/). For this article we'll build something to store and query the emails using our new found vector know-how.  
+As a nosy person one of my fave datasets is the [Enron emails](https://en.wikipedia.org/wiki/Enron_Corpus). Enron was a huge energy company that was ran by bad people and ultimately collapsed. You can even get to know the people a bit more with the [documentary](https://www.imdb.com/title/tt1016268/). For this article we'll build something to store and query the emails using our new found vector know-how.  
 
 _I intend to write another article around using the Enron emails with Graph Neural Networks_
 
@@ -239,3 +239,45 @@ The full function is below.
 		)
 
 		return result
+
+Lets make like a journalist and look for those emails talking about the bad things
+
+	eup = EmailData()
+	result = eup.query("criminality")
+	print(json.dumps(result, indent=4))
+
+The first result is a bit of fluff, the second however
+
+	"subject": "Anonymous report on violations by senior Enron officials"
+	"content": "Please see attached file.  I wish to remain anonymous...",
+
+Scooby doo and his gang would be all over this. We don't have the attachment sadly. 
+You can see though how this email didn't contain the word 'criminality' but due to the wonders of vector search the context is correct.
+
+![Enron Scooby]({static}/images/vector_database/enron_scooby.jpg) 
+
+How about something a bit more far out, something more than a single word - "the captain of the titanic". The results are below.
+
+	"subject": "Cruise",
+	"content": "I trust you are already planning our next trip..."
+
+	"subject": "Dear Cruisers",
+	"content": " - CRUISE~1.DOC",
+
+Emails about going on a trip on a cruise ship! Considering this is emails from the CEO of an energy company, these results are pretty good.
+
+From here you can add things like 
+
+ - Summarise an email
+ - Add moveTo and moveFrom so you can (de)emphasise parts of your query
+ - Return the similarity scores
+
+I'm not going through that here instead I'm adding something a bit more of a platform to build from.
+
+### Build the app
+
+Lets build an app that uses the super search functionality. 
+
+This isn't a fastapi tutorial that can be found (here)[https://fastapi.tiangolo.com/tutorial/]
+
+
