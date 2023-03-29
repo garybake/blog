@@ -173,9 +173,11 @@ The full create schema function looks like this
 		# db.client.schema.delete_class("Email")  # uncomment to delete table if needed
 		db.client.schema.create_class(class_obj)
 
-If you are recreating the class you'll need to uncomment the delete line. Trying to overwrite will fail. The database will now have the email class and be ready to accept data.
+If you are recreating the class you'll need to uncomment the delete line. Trying to overwrite will fail. This is also useful for quickly emptying the table. The database will now have the email class and be ready to accept data.
 
 ### Upload data
+
+If this is your first run, its best to try with fewer emails. The get_email_data() function has a max_emails parameter. Set this to something like 20.
 
 Inserts are done in batches. It depends on your volume and size of the texts you are uploading. I found I had timeouts when uploading 3000+ full page documents (for another project) and batches of 50 worked well.
 
@@ -188,7 +190,9 @@ Inserts are done in batches. It depends on your volume and size of the texts you
 				db.client.batch.add_data_object(email, "Email")
 
 
+You can confirm the data has loaded with https://your-database-code.weaviate.network/v1/objects
 
+### Query the data
 
-check with https://some-endpoint.weaviate.network/v1/objects
-
+Now we come to the powerful part, using the vector search.
+Note. if you run this and get the error 'Model .... is currently loading ...'. You should wait a couple of minutes. It just means the instance is turned off due to it being free and weaviate are rebooting it.
