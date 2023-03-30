@@ -137,17 +137,13 @@ The easiest way is to use weaviate cloud services. Weaviate give you a free sand
 
 [https://console.weaviate.io/](https://console.weaviate.io/)
 
-Sign up to create an account. Press the + button to create a new instance.
-(TODO check - weaviate updated the UI this morning)
-
+Sign up to create an account. Press the + button to create a new cluster.
 
 | Setting | Value |
 | --- | ----------- |
 | Name | Anything |
-| Subscription Tier | Sandbox |
-| Weaviate Version | Latest |
-| Enable Authentication | Disabled for now (**don't** upload any sensitive data) |
-
+| Subscription Tier | Free sandbox |
+| Enable Authentication | No for now (**don't** upload any sensitive data) |
 
 Press the create button and wait a couple of minutes for your instance to be created.
 
