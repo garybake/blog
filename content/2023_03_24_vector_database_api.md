@@ -16,9 +16,11 @@ _I intend to write another article around using the Enron emails with Graph Neur
 
 Our cutting edge app is named **"Enronalyse"**. Thank you GPT4 for coming up with the awesome name, you are the best!
 
+![search UI]({static}/images/vector_database/search_ui.jpg) 
+
 The repository is [here](https://github.com/garybake/enronalyse)
 
-You'll need to create a ".env" file. This contains all of the settings relevant to your project (and saves me the worry of leaking my own information). I'll show which settings to add as we work through the app.
+First pull the repo and create a ".env" file. This contains all of the settings relevant to your project (and saves me the worry of leaking my own secrets). I'll show which settings to add as we work through the app.
 
 I'm using [Weaviate](https://weaviate.io/) as the vector database of choice. It has a really clean api and great documentation for getting you started.
 
@@ -26,11 +28,11 @@ I'm using [Weaviate](https://weaviate.io/) as the vector database of choice. It 
 
 The first thing is to download the data and get it into a nice ingestible format.
 
-The source can be found [here](https://www.cs.cmu.edu/~enron/), it's pretty big at 1.7Gb. Don't worry if you are still on dial up I'll share a sample of it pickled in the repo (TODO remember this)
+The source can be found [here](https://www.cs.cmu.edu/~enron/), it's pretty big at 1.7Gb. Don't worry if you are still on dial up I've shared a sample of it pickled in the repo (emails_500.pkl)
 
-We'll start at the top chairman and CEO, Ken Lay. You only need to extract the `enron_mail_20150507.tar.gz\enron_mail_20150507.tar\maildir\lay-k\` folder and put it somewhere accessible.
+We'll start at the top, chairman and CEO, Ken Lay. You only need to extract the `enron_mail_20150507.tar.gz\enron_mail_20150507.tar\maildir\lay-k\` folder and put it somewhere accessible.
 
-Add the folder to your .env file, replacing with your own folder. The **/*_ at the end tells python to filter all subfolders and then the files ending in an underscore.
+Add the folder to your .env file, replacing with your own folder. The `**/*_` at the end tells python to filter all subfolders and then the files ending in an underscore.
 
 	EMAIL_FOLDER = "./data/lay-k/**/*_"  # NonWindows
 
@@ -39,7 +41,7 @@ Add the folder to your .env file, replacing with your own folder. The **/*_ at t
 
 
 ## Parse emails
-The code for parsing emails is in the `import/import_emails.py` file. Its not that complex. Weaviate expects records formatted as a dictionary.
+The code for parsing emails is in the `import/read_emails.py` file. Its not that complex. Weaviate expects records formatted as a dictionary.
 
 	{
 	    'send_date': 'Fri, 8 Dec 2000 07:49:00 -0800 (PST)', 
@@ -50,6 +52,7 @@ The code for parsing emails is in the `import/import_emails.py` file. Its not th
 	    'content': "..."
 	}
 
+You can run the this file and it will print out a count to show its all working.
 I'll come back to this later. But for now we have a array of email records with the text in the content field.
 
 ## Up and running with weaviate
@@ -60,7 +63,7 @@ There are 2 methods to get up and running. Our app will work with either. The cl
 
 The most easiest way is to use weaviate cloud services. Weaviate give you a free sandbox environment to evaluate the technology.
 
-https://console.weaviate.io/
+[https://console.weaviate.io/](https://console.weaviate.io/)
 
 Sign up to create an account. Press the + button to create a new instance.
 
@@ -69,13 +72,13 @@ Sign up to create an account. Press the + button to create a new instance.
 | --- | ----------- |
 | Name | Anything |
 | Subscription Tier | Sandbox |
-| Weaviate Version: | Latest |
-| Enable Authentication | Disabled for now (don't upload any sensitive data) |
+| Weaviate Version | Latest |
+| Enable Authentication | Disabled for now (*don't* upload any sensitive data) |
 
 
 Press the create button and wait a couple of minutes for your instance to be created.
 
-Add the url of the instance to the .env file. It should be the name with the weaviate network of the domain. i.e. If your instance name is abcde add the following
+Add the url of the instance to the .env file. It should be the name with the weaviate network of the domain. i.e. If your instance name is _abcde_ add the following
 
 	VDB_URL = "https://abcde.weaviate.network"
 
@@ -87,8 +90,8 @@ Create yourself an access token [here](https://platform.openai.com/account/api-k
 
 	OPENAI_API_KEY="*****"
 
-Also have a look at [Hugging Face](https://huggingface.co/) this site is amazing for hosting your own models and interacting with other pretty huge models.
-I went with openai for this article because the number of requests you could maker per second was more generous.
+Also have a look at [Hugging Face](https://huggingface.co/). This site is amazing for hosting your own models and interacting with other pretty huge models.
+I went with openai for this article because the number of requests you could maker per second was more generous on the free tier.
 
 
 
@@ -133,16 +136,16 @@ You will need to **change the first part of the volumes parameter** to a folder 
 
 You can see there are 2 main containers, the weaviate database and the transformer. The transformer uses the [multi-qa-MiniLM-L6-cos-v1](https://huggingface.co/sentence-transformers/multi-qa-MiniLM-L6-cos-v1) model. This is a smaller language model that produces vectors that are 384 elements in length. 
 
-For comparison the bert model has 768 and ada has 1024. The larger the vector size the larger and richer the vector space. Though you then pay the cost of compute converting the sentences, search complexity and also the size of the db on disk. If you look into the weaviate tutorial it's fairly easy to switch out and use openAI, HuggingFace or Cohere apis to generate your vectors. The example below uses the openai api setup above.
+For comparison the bert model has 768 and ada has 1024 elements. The larger the vector size the larger and richer the vector space. Though you then pay the cost of compute converting the sentences, search complexity and also the size of the db on disk. If you look into the weaviate tutorial it's fairly easy to switch out and use openAI, HuggingFace or Cohere apis to generate your vectors. The example below uses the openai api setup above.
 
 ### Connect and create the class
 
-Lets put some data into the database
+Lets put some data into the database. The code for this part is in the `import/import_emails.py` file
 
 ![wrong database]({static}/images/vector_database/wrongdatabase.jpg) 
 
 I've created a VDB class that our database interactions talk to.
-The first part is the connection to the database. The connection handles authentication and various API keys but we are keeping it simple so just need the url.
+The first part is the connection to the database. The connection handles authentication and various API keys but we are keeping it simple so just need the url from the .env file.
 
 	def connect(self):
 		db_url = os.getenv("VDB_URL")
@@ -191,7 +194,7 @@ Inserts are done in batches. It depends on your volume and size of the texts you
 				db.client.batch.add_data_object(email, "Email")
 
 
-You can confirm the data has loaded with https://your-database-code.weaviate.network/v1/objects 
+You can confirm the data has loaded at https://your-database-code.weaviate.network/v1/objects.   
 Once you are confident its working, recreate the email class and upload 500 messages.
 
 ### Query the data
@@ -268,16 +271,50 @@ Emails about going on a trip on a cruise ship! Considering this is emails from t
 
 From here you can add things like 
 
- - Summarise an email
- - Add moveTo and moveFrom so you can (de)emphasise parts of your query
- - Return the similarity scores
-
 I'm not going through that here instead I'm adding something a bit more of a platform to build from.
 
 ### Build the app
 
 Lets build an app that uses the super search functionality. 
 
-This isn't a fastapi tutorial that can be found (here)[https://fastapi.tiangolo.com/tutorial/]
+This isn't a fastapi tutorial that can be found [here](https://fastapi.tiangolo.com/tutorial/). It feels like a bit of a draw the owl momement.
 
+![Draw Owl]({static}/images/vector_database/draw_owl.png) 
 
+This is not production code and more of a proof of concept. I've basically mashed some code from other projects together with the code above.
+
+To run it ensure your .env has the VDB_URL and OPENAI_API_KEY in and working
+
+    EMAIL_FOLDER = "***"
+    VDB_URL = "https://***.weaviate.network"
+    OPENAI_API_KEY="***"
+
+Then run `uvicorn app.main:app --reload` and open [http://localhost:9000/](http://localhost:9000/)
+
+Enter your search term, press the search button and boom, it renders your search results from the vector database.
+You can see the swagger api docs at [http://localhost:9000/docs](http://localhost:9000/docs). These allow you to test and play with the endpoints.
+
+I'll go over the main components of the app
+
+app/core/db - Utility class for connecting to the database
+app/api/v1/email	-	Handles the api requests for the search term
+app/models/email	-	Anything to do with the email model is here. Talks to the db class and cleans the input/output from it.
+app/views/index	-	Handles rendering the front end
+static/ - images, css and js
+static/js/index - JQuery code to handle the search press, api request and rendering the result
+templates - Jinja templates of html. Uses bootstrap.
+
+There isn't much too it but I think it looks impressive.
+
+### Expand Enronalyse
+
+Looking for ideas to expand the app?
+
+ - Add summaries of the emails using the [hugging face api](https://huggingface.co/facebook/bart-large-cnn)
+ - Add moveTo and moveFrom so you can (de)emphasise parts of your query
+ - Return the similarity scores
+ - Plot the space in 3d
+ - Formally declare the schema of the class
+ - Add your own vectorizer and pass the vectors to the db.
+ - Add more classes
+ - Add authentication to the db and app.
