@@ -10,7 +10,7 @@ featured_image: /images/vector_database/isthisadb.jpg
 
 ![king queen]({static}/images/vector_database/isthisadb.jpg)  
 
-A while ago I was reading up on how databases work with native geospatial datatypes, basically lat/lon pairs, 2 dimensional vectors. This then lead on to adding altitude and time, 3 and 4 dimensional vectors. How does the indexing and search work with these? for 2 and 3 dimensions many use [R-trees](https://en.wikipedia.org/wiki/R-tree).
+A while ago I was reading up on how databases work with native geospatial datatypes; lat/lon pairs or 2 dimensional vectors. This then lead on to adding altitude and time, 3 and 4 dimensional vectors. How does the indexing and search work with these? For 2 and 3 dimensions many databases use [R-trees](https://en.wikipedia.org/wiki/R-tree).
 
 What would you need to do if you had say 8, 15 or even 1024 dimensions? What sort of scifi nonsense is this?
 
@@ -20,7 +20,7 @@ What would you need to do if you had say 8, 15 or even 1024 dimensions? What sor
 
 First lets show the main use case for storing n-dimensional vectors. In machine learning, especially with neural networks, you are are using numerical data. The learning models don't understand things like text, pictures, sound etc. We need a method transforming this unstructured data into numbers. 
 
-There are many, many methods to do this but here we are concerned with vectors, sometimes called embeddings. I'll talk through using text, but the input can be anything unstructured (or even structured).
+There are [many](https://en.wikipedia.org/wiki/One-hot), [many](https://en.wikipedia.org/wiki/Cluster_analysis) methods to do this but here we are concerned with vectors, sometimes called embeddings. I'll talk through using text data, but the input can be anything unstructured (or even structured).
 
 The embedding function takes in the sentence and outputs the vector.
 
@@ -38,7 +38,7 @@ The great thing about these vector representations is that by their nature simil
 
 
 ### The tech
-Creating this embedding mapping is beyond this article but there is a good article (here)[https://pub.towardsai.net/create-your-own-mini-word-embedding-from-scratch-c7b32bd84f8e].
+Creating this mapping from text to embedding out of scope of this article but there is a good article [here](https://pub.towardsai.net/create-your-own-mini-word-embedding-from-scratch-c7b32bd84f8e).
 
 Word2vec is one of the earliest libraries I can remember. Things have moved on since then with the advancement of deep learning. We had models such as GloVe and BERT which enabled full sentences to be encoded. With this came new companies that provide apis to the larger cutting edge models. Companies like (hugging face)[https://huggingface.co/sentence-transformers] and (openai)[https://platform.openai.com/docs/guides/embeddings].
 
