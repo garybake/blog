@@ -6,11 +6,11 @@ Slug: vector_databases
 Summary: Fun with vector databases
 featured_image: /images/vector_database/isthisadb.jpg
 
-## The best place to store you favourite kinds of data
+## Part 1. The best place to store you favourite kinds of data
 
 ![king queen]({static}/images/vector_database/isthisadb.jpg)  
 
-A while ago I was reading up on how databases work with native geospatial datatypes; lat/lon pairs or 2 dimensional vectors. This then lead on to adding altitude and time, 3 and 4 dimensional vectors. How does the indexing and search work with these? For 2 and 3 dimensions many databases use [R-trees](https://en.wikipedia.org/wiki/R-tree).
+A while ago I was reading up on how databases handle native geospatial datatypes; lat/lon pairs or 2 dimensional vectors. This then lead on to adding altitude and time, 3 and 4 dimensional vectors. How does the indexing and search work with these? For 2 and 3 dimensions many databases use [R-trees](https://en.wikipedia.org/wiki/R-tree).
 
 What would you need to do if you had say 8, 15 or even 1024 dimensions? What sort of scifi nonsense is this?
 
@@ -37,34 +37,34 @@ The vectors towards the lower right are more feminine, those to the upper left m
 The great thing about these vector representations is that by their nature similar things will be close together in the space. So 'cat' will be near to 'dog' but far away from ['chocolate and peanut butter sandwich'](https://www.food.com/recipe/grilled-chocolate-and-peanut-butter-sandwich-114053).
 
 
-### The tech
+### Vectorizer function creation
 Creating this mapping from text to embedding out of scope of this article but there is a good article [here](https://pub.towardsai.net/create-your-own-mini-word-embedding-from-scratch-c7b32bd84f8e).
 
-Word2vec is one of the earliest libraries I can remember. Things have moved on since then with the advancement of deep learning. We had models such as GloVe and BERT which enabled full sentences to be encoded. With this came new companies that provide apis to the larger cutting edge models. Companies like (hugging face)[https://huggingface.co/sentence-transformers] and (openai)[https://platform.openai.com/docs/guides/embeddings].
+Word2vec is one of the earliest libraries I can remember. Things have moved on since then with the advancement of deep learning. We had models such as GloVe and BERT which enabled full sentences to be encoded. With this came new companies that provide apis to the larger cutting edge models. Companies like [hugging face](https://huggingface.co/sentence-transformers) and [openai](https://platform.openai.com/docs/guides/embeddings).
 
 ### Why vector databases?
 
-Now that we have a rushed description of embeddings, why would you want to store them? 
+Now that we have an abridged description of embeddings, why would you want to store them? 
 Imagine you had a million stored documents, you are a solicitor maybe. You are working on a gnarly case about Jack Sparrow and piracy
 
 ![cat pirate]({static}/images/vector_database/iwasapirate.jpg)  
 
-You could do a text search for words like 'piracy' and 'sea' but you would miss a lot of documents. Words like 'marine' wouldn't be found and you may get a lot of documents back relating to software piracy. What you want is something that understands the context of what you are asking. 
+You could do a text search for words like 'piracy' and 'sea' but you would miss a lot of documents. Words like 'marine' wouldn't be found and you may get returned some documents relating to software piracy. What you want is something that understands the context of what you are asking. 
 
 Now imagine all of your documents are stored as points in this big vector space. Your query text is also converted to a point in the space and we look for the documents that are nearest to this point and return them to the user - amazing idea eh!
 
-There are many things you can do with this technology
- - Find documents similar to a document or query text
- - Question / answering
- - Look for clusters in the space and use that to tag your data
- - Anomaly detection - why is this document far away from any others?
- - Matching texts roles to resumes, dating 
- - Deduplication of documents
+There are many things you can do with this technology  
+ - Find documents similar to a document or query text.  
+ - Question / answering.  
+ - Look for clusters in the space and use that to tag your data.  
+ - Anomaly detection - why is this document far away from any others?  
+ - Matching texts roles to resumes, dating. 
+ - Deduplication of documents.  
 
-With the recent explosion in generative AI you should soon be able to the following
- - Generate summaries of documents (you can already do this)
- - Move the document around the space. Imagine being able to make a document less aggressive sounding or maybe make everything a bit more geography related.
- - What is the difference between these documents.
+With the recent explosion in generative AI you should soon be able to the following  
+ - Generate summaries of documents (you can already do this).  
+ - Move the document around the space. Imagine being able to make a document less aggressive sounding or maybe make everything a bit more geography related.  
+ - What is the difference between two documents.  
 
 ### Fast search
 

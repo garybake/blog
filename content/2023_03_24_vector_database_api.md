@@ -6,7 +6,7 @@ Slug: vector_database_application
 Summary: Building an application using a vector database
 featured_image: /images/vector_database/distractedbf.jpg
 
-## Build a killer app using vector databases
+## Part 2. Build a killer app using vector databases
 
 ![distracted me]({static}/images/vector_database/distractedbf.jpg) 
 
