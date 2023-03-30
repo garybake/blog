@@ -10,7 +10,9 @@ featured_image: /images/vector_database/distractedbf.jpg
 
 ![distracted me]({static}/images/vector_database/distractedbf.jpg) 
 
-As a nosy person one of my fave datasets is the [Enron emails](https://en.wikipedia.org/wiki/Enron_Corpus). Enron was a huge energy company that was ran by bad people and ultimately collapsed. You can even get to know the people a bit more with the [documentary](https://www.imdb.com/title/tt1016268/). During the trial Enron was forced to release a ton of emails. For this article we'll build something to store and query the emails using our new found vector know-how.  
+The first part of this article can be found here [Fun with Vector Databases](./vector_databases.html) 
+
+As a nosy person one of my fave datasets is the [Enron emails](https://en.wikipedia.org/wiki/Enron_Corpus). Enron was a huge energy company that was ran by bad people and ultimately collapsed. You can get to know how bad the bad people where with the [documentary](https://www.imdb.com/title/tt1016268/). During the trial Enron was forced to release a ton of emails. For this article we'll build something to store and query the emails using our new found vector know-how.  
 
 _I intend to write another article around using the Enron emails with Graph Neural Networks_
 
@@ -30,13 +32,13 @@ The first thing is to download the data and get it into a nice ingestible format
 
 The source can be found [here](https://www.cs.cmu.edu/~enron/), it's pretty big at 1.7Gb. Don't worry if you are still on dial up I've shared a sample of it pickled in the repo (`emails_500.pkl`)
 
-We'll start at the top, chairman and CEO, Ken Lay. You only need to extract the `enron_mail_20150507.tar.gz\enron_mail_20150507.tar\maildir\lay-k\` folder and put it somewhere accessible.
+We'll start at the top, chairman and CEO, [Ken Lay](https://www.youtube.com/watch?v=vUAaHkGpJy8). You only need to extract the `enron_mail_20150507.tar.gz\enron_mail_20150507.tar\maildir\lay-k\` folder and put it somewhere accessible.
 
 Add the EMAIL_FOLDER to your .env file, replacing the path with your own folder where you stored the emails. The `**/*_` at the end tells python to filter all subfolders and ensure the files end in an underscore.
 
-	EMAIL_FOLDER = "./data/lay-k/**/*_"  # NonWindows
+	EMAIL_FOLDER="./data/lay-k/**/*_"  # NonWindows
 
-	EMAIL_FOLDER = "data\lay-k\**\*_"    # Windows
+	EMAIL_FOLDER="data\lay-k\**\*_"    # Windows
 
 
 
@@ -63,7 +65,7 @@ There are 2 methods to obtain a running weaviate instance. Our app will work wit
 
 ### 1. Weaviate hosted
 
-The most easiest way is to use weaviate cloud services. Weaviate give you a free sandbox environment to evaluate the technology.
+The easiest way is to use weaviate cloud services. Weaviate give you a free sandbox environment to evaluate the technology.
 
 [https://console.weaviate.io/](https://console.weaviate.io/)
 
@@ -81,9 +83,9 @@ Sign up to create an account. Press the + button to create a new instance.
 
 Press the create button and wait a couple of minutes for your instance to be created.
 
-Add the url of the instance to the `.env` file. It should be the name you chose plus the weaviate network of the domain. i.e. If your instance name is _abcde_ add the following
+Add the url of the instance to the `.env` file. It should be the name you chose plus the weaviate network of the domain. i.e. if your instance name is _abcde_ add the following
 
-	VDB_URL = "https://abcde.weaviate.network"
+	VDB_URL="https://abcde.weaviate.network"
 
 You now have some cutting edge architecture at your disposal, how easy was that!
 
@@ -144,12 +146,12 @@ To start the local instance its `docker-compose up -d` and `docker-compose down`
 
 The url to add to the `.env` will be localhost on port 8080
 
-	VDB_URL = "https://localhost:8080"
+	VDB_URL="https://localhost:8080"
 
 
 ### Connect and create the class
 
-Lets insert some data into the database. The code for this part is in the `import/import_emails.py` file
+Lets insert some data into the database. The code for this part is in the `import/import_emails.py` file.
 
 ![wrong database]({static}/images/vector_database/wrongdatabase.jpg) 
 
@@ -165,9 +167,9 @@ The first part is the connection to the database. The connection handles authent
 		)
 		return self
 
-The next part is where to store the data. Everything related to email uploading is in the EmailUploader class.
+The next part is where to store the data. Everything related to email uploading is in the EmailData class.
 Weaviate uses the notion of 'classes' (not the same as python classes) which are akin to tables. We are going to store everything in an 'Email' class.
-The smallest example just needs the name and the vectorizer. Later on you can add things like formally declaring the schema for the class.
+The smallest example of declaring the class just needs the class name and the vectorizer. Later on you can add things here like formally declaring the schema for the class.
 
 	class_obj = {
 		"class": "Email",
@@ -186,11 +188,11 @@ The full create schema function looks like this
 		# db.client.schema.delete_class("Email")  # uncomment to delete table if needed
 		db.client.schema.create_class(class_obj)
 
-If you are recreating the class you'll need to uncomment the delete line. Trying to overwrite will fail. This is also useful for quickly emptying the table. The database will now have the email class and be ready to accept data.
+If you are recreating the class you'll need to uncomment the delete line. Trying to overwrite will error. This is also useful for quickly emptying the table. The database will now have the email class and be ready to accept data.
 
 ### Upload data
 
-If this is your first run, its best to try with fewer emails. The get_email_data() function has a max_emails parameter. Set this to something like 20 while you play around with it.
+If this is your first run, its best to try with fewer emails. The `get_email_data()` function has a max_emails parameter. Set this to something like 20 while you play around with it.
 
 Inserts are done in batches. It depends on your volume and size of the texts you are uploading. I found I had timeouts when uploading 3000+ full page documents (for another project) and batches of 50 worked well.
 
@@ -217,7 +219,7 @@ The first part is what information we want returned. Just the main ones will do,
 	search_headers = ["email_id", "send_date", "em_to", "subject", "content"]
 
 
-The next part is the nearText. This is our query text; that gets turned into a point in the vector space and returns the emails nearby to it. We pass the query_term into the function.
+The next part is the nearText. This is our query text that gets turned into a point in the vector space and returns the emails nearby to it. We pass the query_term into the function.
 
 	nearText = {
 		"concepts": [query_term],
@@ -252,7 +254,7 @@ The full function is below.
 
 		return result
 
-Lets make like a journalist and look for those emails talking about the bad things
+Lets make like a journalist and look for those emails talking about the bad things. We'll search for the word 'criminality'.
 
 	eup = EmailData()
 	result = eup.query("criminality")
@@ -277,7 +279,7 @@ How about something a bit more far out, something more than a single word - "the
 	"content": " - CRUISE~1.DOC",
 
 Emails about going on a trip on a cruise ship! Considering this is emails from the CEO of an energy company, these results are pretty good.
-You can add full pieces of text in the search term, so you can search for emails that are similar an existing email. Just be careful of the token limit on the vectorizer.
+You can add full documents of text in the search term, so you can search for emails that are similar an existing email. Just be careful of the token limit on the vectorizer.
 
 Check the [weaviate docs](https://weaviate.io/developers/weaviate) for other methods of tuning the search.
 
@@ -285,32 +287,34 @@ Check the [weaviate docs](https://weaviate.io/developers/weaviate) for other met
 
 Lets build an app that uses the super search functionality. 
 
-The fastapi tutorial that can be found on the [fastapi site](https://fastapi.tiangolo.com/tutorial/). It feels like a bit of a draw the owl moment with me dumping the complete app here.
+The fastapi tutorial that can be found on the [fastapi site](https://fastapi.tiangolo.com/tutorial/). It feels like a bit of a draw the owl moment with me dumping the complete app here all built.
 
 ![Draw Owl]({static}/images/vector_database/draw_owl.png) 
 
-This is not production code and more of a proof of concept. I've basically mashed some code from other projects together with the code above.
+This is not production code and more of a proof of concept. I've basically mashed some code from other personal projects together with the code above.
 
 To run it ensure your `.env` has the VDB_URL and OPENAI_API_KEY filled in and working
 
-    EMAIL_FOLDER = "***"
-    VDB_URL = "https://***.weaviate.network"
+    EMAIL_FOLDER="***"
+    VDB_URL="https://***.weaviate.network"
     OPENAI_API_KEY="***"
 
-Pip install the requirements and then run `uvicorn app.main:app --reload` 
+Pip install the requirements and then run `uvicorn app.main:app --reload`.   
 Open [http://localhost:8000/](http://localhost:8000/) and be amazed by the slick UI.
+
+![search UI]({static}/images/vector_database/search_ui.jpg) 
 
 Enter your search term, press the search button and boom, it renders your search results from the vector database.  
 You can see the swagger api docs at [http://localhost:8000/docs](http://localhost:8000/docs). These allow you to test the endpoints without the UI.
 
-I'll go over the main components of the app
+Below are the main components of the app.
 
-`app/core/db` - Utility class for connecting to the database  
-`app/api/v1/email`	-	Handles the api requests for the search term  
+`app/core/db` - Utility class for connecting to the database.  
+`app/api/v1/email`	-	Handles the api requests for the search term.  
 `app/models/email`	-	Anything to do with the email model is here. Talks to the db class and cleans the input/output from it.  
-`app/views/index`	-	Handles rendering the front end  
-`static/` - images, css and js  
-`static/js/index` - JQuery code to handle the search button press, api request and rendering the result  
+`app/views/index`	-	Handles rendering the front end.  
+`static/` - images, css and js.  
+`static/js/index` - JQuery code to handle the search button press, api request and rendering the result.  
 `templates` - Jinja templates of html. Uses bootstrap.  
 
 There isn't much too it but I think it looks impressive.
@@ -331,4 +335,4 @@ Looking for ideas to expand the app?
 
 Take the concept app above and make it your own. I feel having these interesting projects are great for generating conversations during interviews.
 
-Thank you for reading and if you need any help with this please reach out to me.
+Thank you for reading and if you have any questions or need any help please reach out to me.
