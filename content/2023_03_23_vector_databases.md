@@ -8,6 +8,8 @@ featured_image: /images/vector_database/isthisadb.jpg
 
 ## Part 1. The best place to store you favourite kinds of data
 
+(Quick link to [repository](https://github.com/garybake/enronalyse) for later)
+
 ![king queen]({static}/images/vector_database/isthisadb.jpg)  
 
 A while ago I was reading up on how databases handle native geospatial datatypes; lat/lon pairs or 2 dimensional vectors. This then lead on to adding altitude and time, 3 and 4 dimensional vectors. How does the indexing and search work with these? For 2 and 3 dimensions many databases use [R-trees](https://en.wikipedia.org/wiki/R-tree).
@@ -58,7 +60,7 @@ There are many things you can do with this technology
  - Question / answering.  
  - Look for clusters in the space and use that to tag your data.  
  - Anomaly detection - why is this document far away from any others?  
- - Matching texts roles to resumes, dating. 
+ - Matching texts roles to resumes or dating.  
  - Deduplication of documents.  
 
 With the recent explosion in generative AI you should soon be able to the following  
@@ -380,6 +382,8 @@ Below are the main components of the app.
 `static/` - images, css and js.  
 `static/js/index` - JQuery code to handle the search button press, api request and rendering the result.  
 `templates` - Jinja templates of html. Uses bootstrap.  
+
+(Quick link to [repository](https://github.com/garybake/enronalyse))
 
 There isn't much too it but I think it looks impressive.
 
