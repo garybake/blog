@@ -8,6 +8,7 @@ from pelicanconf import *
 
 SITEURL = ''
 RELATIVE_URLS = True
+ROBOTS = "index, follow"
 
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
 CATEGORY_FEED_ATOM = 'feeds/%s.atom.xml'
