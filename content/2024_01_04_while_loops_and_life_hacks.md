@@ -1,12 +1,12 @@
 Title: While Loops and Life Hacks
 Date: 2024-1-4 09:25
-Tags: database
+Tags: development
 Category: Python
 Slug: development
 Summary: Applying Software Engineering Principles to Everyday Challenges
 featured_image: /images/devlife/dev_chaos_x.jpg
 
-![dev chaos]({static}/images/devlife/dev_chaos_x.jpg)  
+![dev chaos]({static}/images/devlife/dev_chaos.jpg)  
 
 ## Applying Software Engineering Principles to Everyday Challenges
 
@@ -17,7 +17,7 @@ I was looking around for posts and came accross the old trello board we used whe
 Here are some development principles that should be most applicable to real life.
 
 ### Modularisation
-![dev chaos]({static}/images/devlife/99problems.jpg)
+![dev chaos]({static}/images/devlife/99_problems.jpg)
 
 (Or modularization for my US friends.)  
 I was taught this on my very first A-Level computing lesson (in the old days). You have a huge task, you don't know where to start or how it will get done.
@@ -32,7 +32,7 @@ By the end of the process you should have a load of easily achieaveble tasks.
 You also need to consider the dependancies amongst the tasks. For example the location of the activites you plan will be dependant on the location of the accomodation.
 
 ### Kanban Boards
-![dev chaos]({static}/images/devlife/kanbanboard_x.jpg)  
+![dev chaos]({static}/images/devlife/kanban_board.jpg)  
 
 This is what gave me the idea for the article. Something most companies use to manage development work.
 Each peice of (freshly modularised) work has a ticket. In the most basic example there are 3 columns, **ToDo**, **Doing** and **Done**.
@@ -55,6 +55,8 @@ The goal is to get tickets accross the board. If you have too many tickets in do
 
 ### DRY/YAGNI
 
+![repeats]({static}/images/devlife/repeats.jpg)  
+
  - **DRY** - Don't Repeat Yourself  
  - **YAGNI** - You Ain't Gonna Need It  
 
@@ -72,16 +74,20 @@ Yagni is also something the Money Saving Expert guy preaches. Even if something 
 
 ### Backups
 
+![backups]({static}/images/devlife/backups.png)
+
 Data storage is cheap and being able to get an application backup and running after a failure is hugely important.
 Having a backup and recovery strategy should be part of every application.
 
-Too many times I've seen how a persons phone has broke and they have now lost all their pictures if the grandkids. You can plan for this.
-It could be taking regular backups of your phone, or extracting them to a seperate usb drive. 
-My facourite is google photos (https://photos.google.com/). Put it on your phone and it automatically backsup all of your photos to the cloud with no technical know how.
+Too many times I've seen how a persons phone has broke and they have now lost all of the pictures of their grandkids. You can protect yourself against this.
+It could be taking regular backups of your phone, or backing up files to a seperate usb drive. 
+My favourite is [google photos](https://photos.google.com/). Put it on your phone and it backs up all of your photos to the cloud with no technical know how.
 
-Its hard or pointless to backup a lot of physical things. My wife and I have a shared calendar online (https://calendar.google.com/). If we receive a doctors appointment in the post, it takes a couple of minutes to create a calendar event, take a picture of the letter and add it to the event.
+Its hard or futile to backup certain physical things. My wife and I have a [shared calendar](https://calendar.google.com/) online. If we receive a doctors appointment in the post, it takes a couple of minutes to create a calendar event, take a picture of the letter and add it to the event. Searching through drawers for an old letter is a thing of the past.
 
 ### Pair programming - Bus factor
+
+![backups]({static}/images/devlife/speed_bus.jpg)
 
 A good way to get new developers up to speed it pair programming. This is where two programmers sit at one computer and build a task. Having two people working together should provide a cross polination of ideas and up skilling.
 
@@ -91,6 +97,8 @@ My wife and I sort out a lot of the important things together. Things that affec
 
 ### KISS
 
+![French kiss]({static}/images/devlife/french_kiss.png)
+
 Keep It Simple Stupid
 
 Don't over engineer things. Don't make it too complicated. Build it as obvious and simple as possible. This makes code easier to maintain and understand.
@@ -99,7 +107,9 @@ In real life you can benefit from streamlining things. Having bank accounts accr
 
 ### Technical debt
 
-Tech debt is where you intend to change some code to work better but due to time constraints you can't. You intend to fix it in the future but it sits in the code for months. Over time if you don't take time to fix this debt you can endup with a bad codebase. It takes longer and longer to add new features.
+![French kiss]({static}/images/devlife/tech_debt.jpg)
+
+Tech debt is where you intend to change some code to work better but due to time constraints you can't. You intend to fix it in the future but it sits in the code for months. Over time if you don't put in the effort to fix this debt you can endup with a bad codebase. It takes longer and longer to add new features and your code becomes more unstable. The longer you ignore the debt the longer it will take to fix.
 
 If something needs fixing in your life it is often quicker to fix it now than later on. Wobbly door handle? fix it now before it falls off or one of the kids gets stuck in the bathroom. Batteries in the remote need changing? nobody likes having to standup and press buttons on a tv like some kind of caveman!
 
@@ -108,6 +118,7 @@ A constant stream of small fixes and maintenance can pay huge benefits over a li
 ### Others
 
 There are some other dev principles that can apply to real life but I'm ill and ending the post here.
+
  - Debugging
  - Root cause analysis
  - Continous deployment
