@@ -1,10 +1,10 @@
 Title: While Loops and Life Hacks
-Date: 2024-1-4 09:25
+Date: 2024-1-6 09:25
 Tags: development
 Category: Python
 Slug: development
 Summary: Applying Software Engineering Principles to Everyday Challenges
-featured_image: /images/devlife/dev_chaos_x.jpg
+featured_image: /images/devlife/dev_chaos.jpg
 
 ![dev chaos]({static}/images/devlife/dev_chaos.jpg)  
 
