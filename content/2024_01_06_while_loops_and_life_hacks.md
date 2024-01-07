@@ -103,7 +103,7 @@ Keep It Simple Stupid
 
 Don't over engineer things. Don't make it too complicated. Build it as obvious and simple as possible. This makes code easier to maintain and understand.
 
-In real life you can benefit from streamlining things. Having bank accounts across multiple banks, cooking meals with tons of ingredients when a few core ingrediants will do.
+In real life you can benefit from streamlining things. Having bank accounts across multiple banks, cooking meals with tons of ingredients when a few core ingredients will do.
 
 ### Technical debt
 
