@@ -3,7 +3,7 @@ from PIL import Image
 
 SHOW_IMAGES = False
 
-IMAGE_NAME = os.path.join('vector_database', 'distractedbf.jpg')
+IMAGE_NAME = os.path.join('change_seams', 'roboreplace.png')
 BASE_FOLDER = os.path.join('content', 'images')
 
 image_file = os.path.join(BASE_FOLDER, IMAGE_NAME)
@@ -18,7 +18,7 @@ def shrink_image(im):
     base_height = 270
     wpercent = (base_height / float(im.size[1]))
     wsize = int((float(im.size[0]) * float(wpercent)))
-    im = im.resize((wsize, base_height), Image.ANTIALIAS)
+    im = im.resize((wsize, base_height), Image.LANCZOS)
     return im
 
 shrunk = shrink_image(img)
