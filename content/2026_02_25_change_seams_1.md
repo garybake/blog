@@ -8,6 +8,7 @@ featured_image: /images/change_seams/roboparts.png
 
 ![robo parts]({static}/images/change_seams/roboparts.png)  
 
+[Github repo](https://github.com/garybake/change_seams)
 
 ---
 
@@ -47,7 +48,7 @@ This is the *only* principle in this post: **keep each seam narrow, explicit, an
 
 A FastAPI reference app demonstrating how to build an LLM application where the provider, prompts, tools, config, and observability are each a **change seam** — a narrow interface you can swap without touching anything else.
 
-[Github repo](git@github.com:garybake/change_seams.git)
+[Github repo](https://github.com/garybake/change_seams)
 
 ![openai model]({static}/images/change_seams/app_screenshot1.png)
 
@@ -145,9 +146,6 @@ Check the response's `spans[0].attributes.llm.provider` field - it should now re
 Notice the tracing now shows the anthropic model in use.
 
 
-curl -X POST http://localhost:8080/api/prompts -H "Content-Type: application/json" -d '{"key": "agent.system", "content": "You are a concise assistant. Keep responses under 2 sentences.", "purpose": "terse", "owner": "eng"}
-
-
 ---
 
 ### Drill 2 - Run a "model regression" and contain it with versioning
@@ -169,7 +167,7 @@ curl -X POST http://localhost:8080/api/prompts \
   -d '{"key": "agent.system", "content": "You are a thorough assistant. Always explain your reasoning in detail.", "purpose": "verbose", "owner": "eng"}'
 ```
 
-**Simulate the regression**: activate version 2, run a few queries, observe the output drift.
+**Simulate the regression**: activate version 3, run a few queries, observe the output drift.
 
 ```bash
 curl -X PUT http://localhost:8080/api/prompts/agent.system/3/activate
@@ -213,6 +211,7 @@ If you can check all six boxes, quarterly model swaps are a Tuesday afternoon ta
 
 ## Where to Go From Here
 
+[Github repo](https://github.com/garybake/change_seams)  
 Clone the reference app, run `docker-compose up`, and try both drills yourself. The test suite runs against SQLite with mocked LLM calls, so you don't need API keys to explore the seams.
 
 Next post: **Seam 3 in depth** - writing tool contracts that survive model upgrades, and why `args_schema` is the most important five lines in your tool definition.
