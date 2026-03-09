@@ -4,10 +4,10 @@ Tags: development,change_seams
 Category: Python
 Slug: seams2
 Summary: Part of the Change Seams series - why args_schema is the most important five lines in your tool definition, and how a contract layer survives model upgrades.
-featured_image: /images/change_seams/roboparts.png
+featured_image: /images/change_seams/yolo_tools.jpg
 
 
-![robo parts]({static}/images/change_seams/roboparts.png)  
+![robo parts]({static}/images/change_seams/yolo_tools.jpg)  
 
 [Github repo](https://github.com/garybake/change_seams)
 
@@ -132,6 +132,8 @@ def _run(self, location: str, ...) -> str:
 
 The agent receives a readable string and can tell the user the tool is unavailable. It doesn't crash. This matters because tools are registered at startup - you don't want a missing key to prevent the server from starting, or to blow up mid-conversation.
 
+![no api key]({static}/images/change_seams/app_screenshot_no_weather_tool.png)
+
 ---
 
 ## The Registry
@@ -181,6 +183,7 @@ def allowed_permissions(self) -> set[str]:
 
 Set `POLICY_MODE=restricted` in `.env` and the agent loses access to weather and search without a code change or restart. echo still works - it declares no permissions.
 
+![tool registry]({static}/images/change_seams/tool_registry.jpg)
 
 ---
 
@@ -236,10 +239,13 @@ Add a tool that calculates the number of days between two dates (no external API
 After adding it to `__init__.py`:
 
 ```bash
-curl http://localhost:8000/api/tools | python -m json.tool
+curl http://localhost:8080/api/tools | python -m json.tool
 ```
 
 Your new tool should appear with its full contract.  
+
+![tool registry]({static}/images/change_seams/app_screenshot_api_tools.png)
+
 Then enable it:
 
 ```bash
@@ -257,7 +263,7 @@ With weather and search registered, confirm that `POLICY_MODE=restricted` blocks
 
 ```bash
 # 1. Normal mode - weather tool is available
-curl http://localhost:8000/api/chat \
+curl http://localhost:8080/api/chat \
   -H "Content-Type: application/json" \
   -d '{"message": "What'\''s the weather in Dublin?"}'
 # Agent calls the weather tool, returns temperature
@@ -267,7 +273,7 @@ POLICY_MODE=restricted
 docker-compose restart backend
 
 # 3. Same question, restricted mode
-curl http://localhost:8000/api/chat \
+curl http://localhost:8080/api/chat \
   -H "Content-Type: application/json" \
   -d '{"message": "What'\''s the weather in Dublin?"}'
 # Agent responds that it doesn't have access to weather data
@@ -276,6 +282,8 @@ curl http://localhost:8000/api/chat \
 Check the tool_calls field in the response - it should be empty under restricted mode. The tool was never handed to the LLM, so it could never be called.
 
 **Goal**: Permission enforcement happens at the registry level, not inside the tool. The tool implementation doesn't change. The LLM doesn't see tools it isn't allowed to use.
+
+![no api key]({static}/images/change_seams/app_screenshot_no_weather_key.png)
 
 ### The Checklist
 
