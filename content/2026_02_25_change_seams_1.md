@@ -10,6 +10,10 @@ featured_image: /images/change_seams/roboparts.png
 
 [Github repo](https://github.com/garybake/change_seams)
 
+### Seams series
+- [Part 1. Designing for Model Swaps](/seams1.html)  
+- [Part 2. The Tool Contract Layer](/seams2.html)  
+
 ---
 
 ## The Problem Story
@@ -214,8 +218,8 @@ If you can check all six boxes, quarterly model swaps are a Tuesday afternoon ta
 [Github repo](https://github.com/garybake/change_seams)  
 Clone the reference app, run `docker-compose up`, and try both drills yourself. The test suite runs against SQLite with mocked LLM calls, so you don't need API keys to explore the seams.
 
-Next post: **Seam 3 in depth** - writing tool contracts that survive model upgrades, and why `args_schema` is the most important five lines in your tool definition.
-
+Next post: **Seam 3 in depth** - writing tool contracts that survive model upgrades, and why `args_schema` is the most important five lines in your tool definition.  
+[Part 2. The Tool Contract Layer](/seams2.html)  
 ---
 
 *The LLM landscape moves fast. Your architecture doesn't have to.*
