@@ -12,8 +12,9 @@ featured_image: /images/change_seams/yolo_tools.jpg
 [Github repo](https://github.com/garybake/change_seams)
 
 ### Seams series
-- [Part 1. Designing for Model Swaps](/seams1.html)  
-- [Part 2. The Tool Contract Layer](/seams2.html)  
+- [Part 1. Designing for Model Swaps](/seams1.html)
+- [Part 2. The Tool Contract Layer](/seams2.html)
+- [Part 3. The Observability Layer](/seams3.html)
 
 ---
 
