@@ -2,12 +2,12 @@ Title: The Observability Layer
 Date: 2026-3-22 09:00
 Tags: development,change_seams
 Category: Python
-Slug: seams5
+Slug: seams3
 Summary: Part of the Change Seams series - Instrument once, export anywhere..
-featured_image: /images/change_seams/sarahconnorwatching.jpg
+featured_image: /images/change_seams/observability-so-hot.jpg
 
 
-![robo parts]({static}/images/change_seams/sarahconnorwatching.jpg)  
+![observability so hot]({static}/images/change_seams/observability-so-hot.jpg)  
 
 
 [Github repo](https://github.com/garybake/change_seams)
@@ -148,6 +148,43 @@ log = ObservationLog(
 )
 ```
 
+The logs in the output can be seen
+
+```json
+{
+    "name": "tool.weather",
+    "context": {
+        "trace_id": "0x032a03a1a75c24fbd4cbf4df592b1f5a",
+        "span_id": "0x33d8e995fa82d423",
+        "trace_state": "[]"
+    },
+    "kind": "SpanKind.INTERNAL",
+    "parent_id": "0xb56bd8f4c7391b3c",
+    "start_time": "2026-03-22T20:17:01.137264Z",
+    "end_time": "2026-03-22T20:17:01.137327Z",
+    "status": {
+        "status_code": "UNSET"
+    },
+    "attributes": {
+        "tool.name": "weather",
+        "tool.input": "{'location': 'Prestatyn'}",
+        "tool.output": "content='Prestatyn, GB: 8.8\u00b0C, overcast clouds' name='weather' tool_call_id='call_t0MBLxQZMynSiDmtH1U1Q2mo'",
+        "latency_ms": 440.95
+    },
+    "events": [],
+    "links": [],
+    "resource": {
+        "attributes": {
+            "telemetry.sdk.language": "python",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.39.1",
+            "service.name": "unknown_service"
+        },
+        "schema_url": ""
+    }
+}
+```
+
 The frontend trace panel gets the full span list in the API response - every LLM call and tool invocation with its latency, so a slow conversation can be diagnosed from the UI without touching logs.
 
 ### The metrics layer
@@ -218,6 +255,8 @@ def metrics():
 
 That's the entire integration. `prometheus_client` maintains the metric state globally; `generate_latest()` serialises the current values in Prometheus exposition format. No state to manage, no background thread.
 
+![sarahconnor]({static}/images/change_seams/sarahconnorwatching.jpg)  
+
 ### The exporter - the swappable part
 
 The tracing exporter is configured in one function:
@@ -250,9 +289,13 @@ def setup_tracing():
 
 Nothing else in the codebase changes. The handler continues emitting spans; only their destination changes.
 
+![seeingtraces]({static}/images/change_seams/seeingtraces.jpg)  
+
 ---
 
 ## Prometheus and Grafana
+
+![happygrafana]({static}/images/change_seams/happygrafana.jpg)  
 
 The full monitoring stack runs in docker-compose alongside the app. (I've commented out the app container to make it easier to play with the code in the app)
 Prometheus scrapes the `/metrics` endpoint every 15 seconds:
