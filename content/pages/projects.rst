@@ -22,4 +22,6 @@ Other things I have built in the past
   
   Using Markov chains to generate lyrics.
 
-
+* `Morphogenesis <https://garybake.com/projects/morphogenesis/morphogenesis.html>`_.
+  
+  Using reaction-diffusion to generate animal markings.

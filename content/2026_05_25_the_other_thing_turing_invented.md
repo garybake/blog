@@ -15,7 +15,7 @@ featured_image: /images/morphogenesis/turingglasses.jpg
 - Described the limits of computation before computers existed. 
 - Proposed a test for machine intelligence before there was anything worth testing.
 
-That's the Turing most people know.
+Most people stop there.
 
 In 1952, two years before he died, he published one more paper. It had nothing to do with cryptography or computing. The title was [*The Chemical Basis of Morphogenesis*](https://www.damtp.cam.ac.uk/user/gold/pdfs/teaching/turing1952.pdf).
 
@@ -31,7 +31,7 @@ Turing's paper proposed a mechanism.
 
 He wasn't working with molecular biology - that field was barely starting. He didn't know which specific chemicals were involved. What he did was more abstract: he showed that a *class of system* would produce spatial patterns spontaneously, from a nearly uniform start, given two ingredients and one counterintuitive condition.
 
-![giraffe skin]({static}/images/morphogenesis/giraffeskin.jpg)  
+![giraffe stages]({static}/images/morphogenesis/giraffestages.png)  
 
 ---
 
@@ -49,9 +49,7 @@ But the different diffusion rates break the symmetry. Where U is slightly higher
 
 A small random fluctuation in concentration - which exists in any real system - is enough to start the process. The pattern isn't programmed in. It *grows out of instability*.
 
-**Instability + diffusion = order.**
-
-This is the Turing instability. It's counterintuitive enough that it took a mathematician to notice it.
+This is the Turing instability. It's counterintuitive enough that it took a mathematician to spot it: instability plus diffusion produces order, not chaos.
 
 ---
 
@@ -83,11 +81,13 @@ Simulation can be found [here](/projects/morphogenesis/morphogenesis.html)
 
 The canvas runs the Gray-Scott model in your browser. It starts with random perturbations scattered through a uniform field, then runs forward in time.
 
-![maze]({static}/images/morphogenesis/maze.png)  
+![maze]({static}/images/morphogenesis/diffusionscreenshot.png)  
 
 Each preset loads a different (F, k) pair. **spots** and **coral** settle quickly into stable formations. **maze** and **worms** take longer to resolve. **spirals** never fully settles.
 
 Try the sliders manually. Moving toward the boundary between two pattern types often produces interesting transients before the system makes up its mind.
+
+> If anybody knows why the worms and bubbles aren't working please give me a shout. I've used the defaults found online but can't get them to work
 
 ---
 
@@ -99,14 +99,16 @@ Then molecular biology caught up.
 
 In 2012, researchers showed that the spacing of fingers in mouse embryos follows a Turing mechanism - two proteins, Wnt and Bmp, playing activator and inhibitor. Zebrafish stripes, hair follicle spacing, tooth arrangement, sea shell pigmentation - the same mechanism keeps showing up once you know to look for it.
 
-The influence also runs sideways into other fields:
-
-- **Procedural generation** - game terrain and texture generators use reaction-diffusion because it produces organic-looking structure cheaply, without hand-authoring
-- **GPU shaders** - real-time reaction-diffusion appears in water, skin, and surface material renderers
-- **Artificial life** - a-life researchers use these systems to study how complexity emerges from simple local rules
+Game developers use reaction-diffusion in procedural terrain and texture generation - it produces organic-looking structure without needing anyone to design it by hand. The same equations turn up in GPU shaders for water and skin rendering. A-life researchers have been running variants of this for decades to study how complex structure emerges from local rules with no central coordinator.
 
 It's one of the cleaner examples of a mathematical result being sixty years ahead of the biology. The patterns were sitting in the equations long before anyone found them in a cell.
 
 ---
 
-*Codebreaker. Computer scientist. Developmental biologist. The man had range.*
+My inspiration for this came from having read a Turing biography a number of years ago. I had a vague recollection about him doing other work around animal markings. Some googling and the awesome video below and I was set to build my own simulation.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JtGIc18CGgo?si=seyfBNyf8SqD2YmC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+---
+
+*He died in 1954, two years after the paper was published. It took biology sixty years to catch up.*
