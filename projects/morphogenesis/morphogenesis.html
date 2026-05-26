@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 24px;
+      background: #111;
+      color: #ccc;
+      font-family: monospace;
+    }
+
+    canvas { display: block; }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    input[type=number] {
+      width: 72px;
+      padding: 5px 8px;
+      background: #1e1e1e;
+      color: #ccc;
+      border: 1px solid #444;
+      font-family: monospace;
+      font-size: 14px;
+    }
+
+    input[type=number]:focus {
+      outline: 1px solid #777;
+    }
+
+    button {
+      padding: 6px 18px;
+      background: #2a2a2a;
+      color: #ccc;
+      border: 1px solid #555;
+      font-family: monospace;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    button:hover { background: #3a3a3a; }
+    button:active { background: #444; }
+
+    .presets {
+      display: flex;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .preset {
+      padding: 3px 10px;
+      background: #1e1e1e;
+      border: 1px solid #333;
+      color: #999;
+      cursor: pointer;
+      font-family: monospace;
+    }
+
+    .preset:hover { border-color: #555; color: #ccc; }
+  </style>
+</head>
+<body>
+
+<canvas id="c" width="300" height="300"></canvas>
+
+<div class="controls">
+  <label>F <input type="number" id="fVal" value="0.030" step="0.001" min="0" max="0.1"></label>
+  <label>k <input type="number" id="kVal" value="0.062" step="0.001" min="0" max="0.1"></label>
+  <button onclick="applyParams()">Run</button>
+</div>
+
+<div class="presets">
+  <button class="preset" onclick="setPreset(0.030, 0.062)">spots</button>
+  <button class="preset" onclick="setPreset(0.022, 0.051)">coral</button>
+  <button class="preset" onclick="setPreset(0.058, 0.065)">worms</button>
+  <button class="preset" onclick="setPreset(0.029, 0.057)">maze</button>
+  <button class="preset" onclick="setPreset(0.014, 0.047)">spirals</button>
+  <button class="preset" onclick="setPreset(0.090, 0.059)">bubbles</button>
+</div>
+
+<script src="app.js"></script>
+<script>
+  function applyParams() {
+    const f = parseFloat(document.getElementById('fVal').value);
+    const k = parseFloat(document.getElementById('kVal').value);
+    if (!isNaN(f) && !isNaN(k)) reset(f, k);
+  }
+
+  function setPreset(f, k) {
+    document.getElementById('fVal').value = f.toFixed(3);
+    document.getElementById('kVal').value = k.toFixed(3);
+    reset(f, k);
+  }
+</script>
+
+</body>
+</html>
