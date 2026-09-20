@@ -25,3 +25,9 @@ Other things I have built in the past
 * `Morphogenesis <https://garybake.com/projects/morphogenesis/morphogenesis.html>`_.
   
   Using reaction-diffusion to generate animal markings.
+
+* `Roboview <https://garybake.com/projects/roboview/>`_.
+  
+  A Robocop-calibration-scene, rebuilt with a webcam and a bit of nostalgia.
+  Inspiration from the `Robocop calibration scene <https://www.youtube.com/watch?v=2z8tQqZG8gI&t=305s>`_.  
+  Source code: `here <https://github.com/garybake/robo_view>`_.  
