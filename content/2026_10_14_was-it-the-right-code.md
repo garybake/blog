@@ -1,12 +1,26 @@
 Title: Your AI Wrote the Code. Who Checked It Was the Right Code?
 Date: 2026-10-14 09:00
-Tags: leadership,ai,development,future
+Tags: craft,ai,development,future
 Category: Future
 Slug: who-checked-the-code
-Summary: xxxxxxxxxxxxxxxxxxxxxxxx.
-featured_image: /images/change_seams/roboevolve.png
+Summary: AI can now generate clean, well-tested code in minutes, but who ensures we're building the right thing? This article explores why engineering judgment, challenging assumptions, and understanding business requirements are becoming increasingly important as AI transforms software development..
+featured_image: /images/future_dev/robocop_colab.jpg
 
-# Your AI Wrote the Code. Who Checked It Was the Right Code?
+After 25 years as a software developer, I find myself increasingly wondering what the future holds for our profession. The pace of change in AI is exciting, but I'd be lying if I said it didn't also make me a little anxious. Where will my experience and skills add value in five or ten years? What will being a software engineer actually look like? I don't have all the answers, but I'm putting together a series of articles to collect my thoughts, challenge some of my assumptions, and explore where I think our profession is heading. As Kent Beck put it...
+
+![recalibrate]({static}/images/future_dev/recalibrate.jpg)
+
+---
+
+![robo colab]({static}/images/future_dev/robocop_colab.jpg)
+
+---
+
+### Beyond the Code series
+- [Part 1. Who Checked It Was the Right Code?](/who-checked-the-code.html)
+- [TODO...](/who-checked-the-code.html)
+
+---
 
 ## The Perfect Pull Request
 
@@ -25,6 +39,8 @@ The agent had done exactly what it was asked to do. It detected status changes a
 Nobody had stopped to ask which status changes customers actually cared about, or whether internal warehouse events should trigger an email at all. That assumption made its way into the implementation and then into the tests, where it was treated as expected behaviour.
 
 **Who should have challenged that assumption before the feature reached production?**
+
+![robo success]({static}/images/future_dev/robocop_success.jpg)
 
 ## Passing Tests Doesn't Mean You Built the Right Thing
 
@@ -56,6 +72,8 @@ But speed cuts both ways. We can also produce three prototypes, put them in fron
 [Anthropic's AI-native SDLC playbook](https://claude.com/resources/articles/the-ai-native-sdlc-playbook) argues that planning, review and deployment are increasingly the bottlenecks around faster code generation. I'd add another question: **are we using that speed to learn what users need, or simply to produce more software?**
 
 ## The Engineer Who Knows When to Say No
+
+![robo no nonsense]({static}/images/future_dev/robocop_no_nonsense.jpg)
 
 There's a particular kind of experience that doesn't show up neatly in a unit test. It's the accumulated knowledge of why a system works the way it does, which shortcuts caused trouble last time, and which seemingly harmless changes will create problems six months from now.
 
@@ -113,6 +131,8 @@ As code becomes quicker to produce, I suspect one of our most important engineer
 
 ## Can We Just Ask Another AI to Check?
 
+![robo helpers]({static}/images/future_dev/robocop_helpers.jpg)
+
 If one agent writes the code, another can review it. Give the reviewer a fresh context window, ask it to challenge the implementation, and perhaps add a third agent to question the specification. That can work remarkably well. Independent review can expose missed edge cases, weak tests and questionable architecture without keeping another engineer occupied for hours.
 
 But what exactly is the reviewer checking against?
@@ -147,11 +167,13 @@ That would give us a more useful definition of done. The tests pass, the importa
 
 ## The Code Is Cheap. The Judgment Isn't.
 
+![robo teamwork]({static}/images/future_dev/robocop_teamwork.jpg)
+
 AI gives us the chance to spend less time on routine implementation and more time discovering whether an idea is worth implementing. We can build prototypes quickly, test assumptions early and change course while the cost is still small. That's an extraordinary improvement in how we can work.
 
 It also demands something of us. When a coding agent produces a convincing implementation in twenty minutes, we're the ones deciding whether to accept its assumptions, challenge its design or put the result in front of users. The quality of our questions matters as much as the speed of its answers.
 
-I suspect developers will increasingly be judged by the decisions they help teams make: the problems they clarify, the risks they recognise, the complexity they avoid and the outcomes they can demonstrate. That requires understanding the code and the system around it, even when someone — or something — else writes most of the implementation.
+I suspect developers will increasingly be judged by the decisions they help teams make: the problems they clarify, the risks they recognise, the complexity they avoid and the outcomes they can demonstrate. That requires understanding the code and the system around it, even when someone - or something - else writes most of the implementation.
 
 Which brings us to the next question in this series: **what does it mean to be a senior developer when writing code is no longer the hardest part of the job?**
 
@@ -159,5 +181,5 @@ Which brings us to the next question in this series: **what does it mean to be a
 
 ### Further reading
 
-- [Anthropic — Redesigning source control at Anthropic](https://www.anthropic.com/engineering/redesigning-source-control) — the engineering account behind the migration, architecture and adversarial-review examples.
-- [Anthropic — The AI-native SDLC playbook](https://claude.com/resources/articles/the-ai-native-sdlc-playbook) — the discussion of changing bottlenecks across planning, implementation, review and deployment.
+- [Anthropic - Redesigning source control at Anthropic](https://www.anthropic.com/engineering/redesigning-source-control) - the engineering account behind the migration, architecture and adversarial-review examples.
+- [Anthropic - The AI-native SDLC playbook](https://claude.com/resources/articles/the-ai-native-sdlc-playbook) - the discussion of changing bottlenecks across planning, implementation, review and deployment.
