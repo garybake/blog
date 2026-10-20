@@ -18,6 +18,7 @@ After 25 years as a software developer, I find myself increasingly wondering wha
 
 ### Beyond the Code series
 - [Part 1. Who Checked It Was the Right Code?](/who-checked-the-code.html)
+- [Part 2. The New Senior Developer](/the-new-senior-developer.html)
 - [TODO...](/who-checked-the-code.html)
 
 ---
