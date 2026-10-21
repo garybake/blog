@@ -3,12 +3,12 @@ Date: 2026-10-19 09:00
 Tags: craft,ai,development,future,senior
 Category: Future
 Slug: the-new-senior-developer
-Summary: abc123
+Summary: Imagine you're a senior developer working on an account-management service. You ask a coding agent to add audit logging when users change their account details. It has access to the repository, you give it a few constraints, and you get on with something else.
 featured_image: /images/future_dev/senior_whole_system_view.jpg
 
 ---
 
-![robo colab]({static}/images/future_dev/senior_whole_system_view.jpg)
+![whole system view]({static}/images/future_dev/senior_whole_system_view.jpg)
 
 ---
 
@@ -46,6 +46,8 @@ Then there were the less visible parts of the job. They knew when to challenge a
 The title has never meant exactly the same thing everywhere. Some seniors are deeply hands-on specialists; others spend more time on architecture and mentoring. But the best ones I've worked with were valued for their judgment and responsibility, not the number of lines they produced.
 
 Coding agents are changing how much time seniors need to spend on routine implementation. A task that once occupied an afternoon might now take a few prompts and a review. That creates room for more of the work senior developers were already supposed to do: make architectural choices, help colleagues and look beyond the immediate ticket.
+
+![kings commission]({static}/images/future_dev/senior_kings_commission.jpg)
 
 The opportunity is to apply that experience *before* an agent starts writing, rather than relying on someone to catch every mistake in a pull request.
 
@@ -157,7 +159,7 @@ There's a mentoring problem here too. Junior developers have traditionally encou
 
 Technical expertise won't maintain itself while we're busy delegating work. If it's the basis on which we make decisions, we need to keep using it.
 
-![green checks fail]({static}/images/future_dev/senior_green_checks_fail.png)
+![green checks fail]({static}/images/future_dev/senior_green_checks_fail.jpg)
 
 And there's a final question: **when software is produced by an agent, who owns the outcome?**
 
