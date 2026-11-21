@@ -15,7 +15,8 @@ featured_image: /images/future_dev/medieval_scrolls_beyond_the_curtain_wall.jpg
 ### Beyond the Code series
 - [Part 1. Who Checked It Was the Right Code?](/who-checked-the-code.html)
 - [Part 2. The New Senior Developer](/the-new-senior-developer.html)
-- [Part 3. The Junior Developer Paradox](/the-junior-developer-paradox.html#the-junior-developer-paradox.html)
+- [Part 3. The Junior Developer Paradox](/the-junior-developer-paradox.html)
+- [Part 4. How much can I hand to Claude and still own the feature?](/how-much-can-i-hand-to-claude.html)
 
 ---
 
