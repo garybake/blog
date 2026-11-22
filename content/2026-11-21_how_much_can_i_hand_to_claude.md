@@ -24,7 +24,7 @@ featured_image: /images/future_dev/medieval_tapestry_of_two_maps.jpg
 
 Imagine converting a report from PDF to Markdown. The sentence “as the chart below shows” comes through perfectly. The chart itself is gone.
 
-MarkItDown is an open-source Python library from Microsoft that converts files such as PDFs and Word documents into Markdown. In my fork, I wanted to give developers a way to spot that kind of omission. The idea was an optional check for vector graphics that would flag pages worth a closer look. I wanted the warnings on the conversion result so callers could decide what to do with them. The Markdown itself would stay exactly as it was.
+[MarkItDown](https://github.com/microsoft/markitdown) is an open-source Python library from Microsoft that converts files such as PDFs and Word documents into Markdown. In my fork, I wanted to give developers a way to spot that kind of omission. The idea was an optional check for vector graphics that would flag pages worth a closer look. I wanted the warnings on the conversion result so callers could decide what to do with them. The Markdown itself would stay exactly as it was.
 
 I suggested calling the field `warnings`. Then Claude pointed out a wrinkle. Suppose you’re writing the code that consumes my result and you get back an empty list. Did MarkItDown check the document and find nothing to flag? Did it even look?
 
@@ -36,7 +36,7 @@ An empty list would tell the caller the check had run. To find out whether a par
 
 ![medieval tapestry of the true crossing]({static}/images/future_dev/medieval_tapestry_of_the_true_crossing.jpg)
 
-I want to be able to hand a piece of work to Claude and still call the result mine. For me, that means I understand what we’ve built well enough to explain why it behaves the way it does, spot when Claude has misunderstood the problem, and take over when the requirements change. That’s what I mean by cognitive ownership.
+I want to be able to hand a piece of work to Claude and still call the result mine. For me, that means I understand what we’ve built well enough to explain why it behaves the way it does, spot when Claude has misunderstood the problem, and take over when the requirements change. That’s what I mean by **cognitive ownership**.
 
 At one point in the MarkItDown session I asked Claude to carry on editing the files without checking with me each time. Earlier I’d been quite specific about what should count as a warning. A table border is a vector graphic too. Flag every border and someone converting a long report could end up inspecting dozens of perfectly ordinary tables. I wanted to leave borders and decorative lines out. Once we’d agreed on that, Claude could write it into the spec without asking me to approve the act of typing it.
 
