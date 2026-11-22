@@ -84,9 +84,14 @@ We also had to decide how long Claude should leave someone with a failing test. 
 
 The instruction I care most about is that disagreement can change the patch. If Claude asks which mistake our users can live with, it has to be prepared to change the implementation and the tests when it hears the answer. Otherwise it might as well have skipped the question.
 
+---
+
 The Claude skill and supporting file are linked below. 
 (Note that they make some references to other files that I used in my development. You can remove these references.)
 
 
 [SKILL.md]({static}/extra/SKILL.md)  
 [COGNITIVE_OWNERSHIP.md]({static}/extra/COGNITIVE_OWNERSHIP.md)  
+
+It was a small made up problem I created specifically to test the skill.  
+You can see the PR [here](https://github.com/microsoft/markitdown/pull/2908)  
